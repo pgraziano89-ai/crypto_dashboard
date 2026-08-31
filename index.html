@@ -8,264 +8,216 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>TEST WRD</title>
+<title>WeRide WRD Test</title>
 
 <style>
 
+* {
+    box-sizing: border-box;
+}
+
+html,
 body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
     background: #050505;
-    color: white;
+    color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    padding-top: 100px;
 }
 
-h1 {
-    font-size: 34px;
-    letter-spacing: 5px;
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#price {
-    margin-top: 35px;
-    font-size: 65px;
+.card {
+
+    width: 700px;
+    max-width: 92vw;
+
+    background: linear-gradient(
+        145deg,
+        #151515,
+        #0d0d0d
+    );
+
+    border: 2px solid #292929;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 4px 25px
+        rgba(0,0,0,0.45);
+
+}
+
+.header {
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+.logo {
+
+    width: 55px;
+    height: 55px;
+
+    margin-right: 15px;
+
+}
+
+.title {
+
+    font-size: 30px;
     font-weight: bold;
-    color: #00d084;
+
 }
 
-#change {
-    margin-top: 12px;
-    font-size: 25px;
-    font-weight: bold;
-}
+.subtitle {
 
-#status {
-    margin-top: 25px;
     color: #777;
-    font-size: 15px;
+
+    font-size: 14px;
+
+    margin-top: 4px;
+
 }
 
-.up {
-    color: #00d084;
+.widget {
+
+    width: 100%;
+    height: 220px;
+
+    overflow: hidden;
+
 }
 
-.down {
-    color: #ff4d4d;
+.status {
+
+    text-align: center;
+
+    color: #777;
+
+    font-size: 13px;
+
+    margin-top: 12px;
+
 }
 
 </style>
 
 </head>
 
+
 <body>
 
-<h1>WeRide · WRD</h1>
 
-<div id="price">
-    CARICAMENTO...
-</div>
-
-<div id="change">
-    ---
-</div>
-
-<div id="status">
-    Connessione...
-</div>
+<div class="card">
 
 
-<script>
-
-function loadWRD() {
-
-    var xhr =
-        new XMLHttpRequest();
-
-    /*
-       StockAnalysis pagina WRD.
-       Proviamo a leggere la pagina tramite
-       r.jina.ai, che restituisce il contenuto
-       testuale della pagina.
-    */
-
-    var url =
-        "https://r.jina.ai/https://stockanalysis.com/stocks/wrd/";
-
-    xhr.open(
-        "GET",
-        url,
-        true
-    );
-
-    xhr.onreadystatechange =
-        function() {
-
-            if (
-                xhr.readyState !== 4
-            ) {
-                return;
-            }
-
-            if (
-                xhr.status !== 200
-            ) {
-
-                document.getElementById(
-                    "price"
-                ).innerHTML =
-                    "ERRORE " +
-                    xhr.status;
-
-                document.getElementById(
-                    "status"
-                ).innerHTML =
-                    "Richiesta fallita";
-
-                return;
-            }
+    <div class="header">
 
 
-            try {
+        <svg
+            class="logo"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg">
 
-                var text =
-                    xhr.responseText;
+            <rect
+                width="100"
+                height="100"
+                rx="20"
+                fill="#ffffff"/>
 
-                console.log(
-                    text
-                );
+            <circle
+                cx="50"
+                cy="50"
+                r="37"
+                fill="#111111"/>
+
+            <path
+                d="M26 53 L36 53 L43 34 L51 66 L60 42 L67 53 L75 53"
+                fill="none"
+                stroke="#ffffff"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+
+        </svg>
 
 
-                /*
-                   Cerchiamo:
+        <div>
 
-                   # WeRide Inc. (WRD)
+            <div class="title">
+                WeRide · WRD
+            </div>
 
-                   e il prezzo che segue
-                */
+            <div class="subtitle">
+                NASDAQ · USD · TradingView
+            </div>
 
-
-                var match =
-                    text.match(
-                        /(?:Real-Time Price|Price)[\s\S]{0,150}?(\d+\.\d{2})/
-                    );
+        </div>
 
 
-                /*
-                   Fallback:
-                   cerchiamo direttamente
-                   il primo prezzo con due decimali
-                */
+    </div>
 
-                if (
-                    !match
-                ) {
 
-                    match =
-                        text.match(
-                            /\b(\d+\.\d{2})\b/
-                        );
+    <div class="widget">
 
+
+        <div
+            class="tradingview-widget-container"
+            style="width:100%; height:100%;">
+
+            <div
+                class="tradingview-widget-container__widget"
+                style="width:100%; height:100%;">
+            </div>
+
+
+            <script
+                type="text/javascript"
+                src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js"
+                async>
+
+                {
+                    "symbol": "NASDAQ:WRD",
+                    "width": "100%",
+                    "height": "220",
+                    "locale": "en",
+                    "dateRange": "1D",
+                    "colorTheme": "dark",
+                    "isTransparent": false,
+                    "autosize": false,
+                    "largeChartUrl": ""
                 }
 
-
-                if (
-                    match &&
-                    match[1]
-                ) {
-
-                    var price =
-                        Number(
-                            match[1]
-                        );
+            </script>
 
 
-                    document.getElementById(
-                        "price"
-                    ).innerHTML =
-                        "$ " +
-                        price.toFixed(2);
+        </div>
 
 
-                    document.getElementById(
-                        "status"
-                    ).innerHTML =
-                        "WRD · NASDAQ · " +
-                        new Date()
-                        .toLocaleTimeString(
-                            "it-IT"
-                        );
-
-                }
-                else {
-
-                    document.getElementById(
-                        "price"
-                    ).innerHTML =
-                        "NO DATA";
-
-                    document.getElementById(
-                        "status"
-                    ).innerHTML =
-                        "Prezzo WRD non trovato";
-
-                }
-
-            }
-            catch (e) {
-
-                document.getElementById(
-                    "price"
-                ).innerHTML =
-                    "ERRORE";
-
-                document.getElementById(
-                    "status"
-                ).innerHTML =
-                    e.message;
-
-            }
-
-        };
+    </div>
 
 
-    xhr.onerror =
-        function() {
+    <div class="status">
 
-            document.getElementById(
-                "price"
-            ).innerHTML =
-                "ERRORE RETE";
+        WRD · dati forniti da TradingView
 
-            document.getElementById(
-                "status"
-            ).innerHTML =
-                "Connessione fallita";
-
-        };
+    </div>
 
 
-    xhr.send(null);
+</div>
 
-}
-
-
-/*
-   TEST IMMEDIATO
-*/
-
-loadWRD();
-
-
-/*
-   Aggiornamento ogni 90 secondi
-*/
-
-setInterval(
-    loadWRD,
-    90000
-);
-
-</script>
 
 </body>
 
