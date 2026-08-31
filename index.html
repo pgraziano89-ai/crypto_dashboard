@@ -66,7 +66,7 @@ h1 {
 
 
 /* =====================================================
-   TITOLI SEZIONI
+   SEZIONI
 ===================================================== */
 
 .section-title {
@@ -88,18 +88,18 @@ h1 {
 
 /* =====================================================
    CRYPTO TOP
+   FLEX AL POSTO DI GRID
 ===================================================== */
 
 .crypto-top {
 
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 16px;
+    display: flex;
 
     width: 100%;
+
+    height: 145px;
+
+    gap: 16px;
 }
 
 
@@ -117,7 +117,7 @@ h1 {
 
     border-radius: 17px;
 
-    min-height: 145px;
+    height: 145px;
 
     padding:
         15px 20px;
@@ -133,6 +133,12 @@ h1 {
     box-shadow:
         0 4px 18px
         rgba(0,0,0,0.35);
+
+    flex: 1;
+
+    width: 33.33%;
+
+    overflow: hidden;
 }
 
 
@@ -171,7 +177,7 @@ h1 {
 
     margin-top: 7px;
 
-    font-size: 37px;
+    font-size: 34px;
 
     font-weight: bold;
 
@@ -205,21 +211,20 @@ h1 {
 
 /* =====================================================
    HNT + GRAFICO
+   FLEX AL POSTO DI GRID
 ===================================================== */
 
 .hnt-row {
 
-    display: grid;
-
-    grid-template-columns:
-        0.62fr
-        1.38fr;
-
-    gap: 16px;
+    display: flex;
 
     width: 100%;
 
+    height: 235px;
+
     margin-top: 16px;
+
+    gap: 16px;
 }
 
 
@@ -241,7 +246,7 @@ h1 {
 
     border-radius: 17px;
 
-    min-height: 235px;
+    height: 235px;
 
     padding: 18px;
 
@@ -256,6 +261,10 @@ h1 {
     box-shadow:
         0 4px 18px
         rgba(0,0,0,0.35);
+
+    width: 31%;
+
+    flex-shrink: 0;
 }
 
 
@@ -290,7 +299,7 @@ h1 {
 
 .hnt-price {
 
-    font-size: 44px;
+    font-size: 42px;
 
     font-weight: bold;
 
@@ -323,7 +332,7 @@ h1 {
 
 
 /* =====================================================
-   GRAFICO
+   GRAFICO HNT
 ===================================================== */
 
 .chart-card {
@@ -340,7 +349,7 @@ h1 {
 
     border-radius: 17px;
 
-    min-height: 235px;
+    height: 235px;
 
     padding:
         12px
@@ -351,6 +360,12 @@ h1 {
     box-shadow:
         0 4px 18px
         rgba(0,0,0,0.35);
+
+    flex: 1;
+
+    min-width: 0;
+
+    overflow: hidden;
 }
 
 
@@ -423,7 +438,7 @@ h1 {
 
     border-radius: 17px;
 
-    min-height: 225px;
+    height: 225px;
 
     padding:
         15px
@@ -554,7 +569,7 @@ h1 {
 
 
 /* =====================================================
-   RESPONSIVE
+   TV
 ===================================================== */
 
 @media (max-width: 1100px) {
@@ -562,6 +577,7 @@ h1 {
     body {
 
         padding-left: 4vw;
+
         padding-right: 4vw;
     }
 
@@ -574,38 +590,24 @@ h1 {
 
     .price {
 
-        font-size: 30px;
+        font-size: 28px;
     }
 
 
     .hnt-price {
 
-        font-size: 35px;
+        font-size: 34px;
     }
 
 }
 
 
-@media (max-width: 750px) {
-
-    body {
-
-        overflow-y: auto;
-    }
-
-
-    .crypto-top {
-
-        grid-template-columns: 1fr;
-    }
-
-
-    .hnt-row {
-
-        grid-template-columns: 1fr;
-    }
-
-}
+/*
+   IMPORTANTE:
+   NON mettiamo grid-template-columns
+   per la modalità mobile perché
+   il vecchio Tizen potrebbe interpretarla male.
+*/
 
 </style>
 
@@ -899,7 +901,7 @@ h1 {
 
 
                 <div class="stock-subtitle">
-                    NASDAQ · USD · TradingView
+                    NASDAQ · USD
                 </div>
 
             </div>
@@ -967,27 +969,13 @@ h1 {
 <script>
 
 /* =====================================================
-   CONFIGURAZIONE
+   CONFIG
 ===================================================== */
-
-
-/*
-   Aggiornamento ogni 5 minuti.
-*/
 
 var PRICE_REFRESH = 300000;
 
-
-/*
-   Grafico ogni 5 minuti.
-*/
-
 var CHART_REFRESH = 300000;
 
-
-/*
-   ID CoinPaprika.
-*/
 
 var COIN_IDS = {
 
@@ -1006,11 +994,13 @@ var COIN_IDS = {
 };
 
 
+
 /* =====================================================
    FORMATTA PREZZO
 ===================================================== */
 
 function formatPrice(price) {
+
 
     if (
         price === null ||
@@ -1026,39 +1016,34 @@ function formatPrice(price) {
     var decimals = 2;
 
 
-    if (price < 1) {
+    if (
+        price < 1
+    ) {
 
         decimals = 4;
 
     }
 
 
-    if (price < 0.01) {
+    if (
+        price < 0.01
+    ) {
 
         decimals = 6;
 
     }
 
 
-    /*
-       Usiamo una formattazione semplice
-       compatibile con browser vecchi.
-    */
-
-    var fixed =
-        Number(price).toFixed(
-            decimals
-        );
-
-
-    return "$ " + fixed;
+    return "$ " +
+        Number(price)
+        .toFixed(decimals);
 
 }
 
 
 
 /* =====================================================
-   RICHIESTA HTTP
+   PREZZO SINGOLO
 ===================================================== */
 
 function getCoin(
@@ -1117,7 +1102,7 @@ function getCoin(
                     );
 
                 }
-                catch (error) {
+                catch (e) {
 
                     callback(
                         symbol,
@@ -1125,7 +1110,6 @@ function getCoin(
                     );
 
                 }
-
 
             }
             else {
@@ -1158,7 +1142,7 @@ function getCoin(
 
 
 /* =====================================================
-   MOSTRA CRYPTO
+   VISUALIZZA PREZZO
 ===================================================== */
 
 function showCoin(
@@ -1203,10 +1187,6 @@ function showCoin(
     }
 
 
-    /*
-       Elementi HTML.
-    */
-
     var priceId;
 
     var changeId;
@@ -1247,7 +1227,9 @@ function showCoin(
         );
 
 
-    if (priceElement) {
+    if (
+        priceElement
+    ) {
 
         priceElement.innerHTML =
             formatPrice(
@@ -1338,12 +1320,6 @@ function updatePrices() {
     var valid = 0;
 
 
-    /*
-       Richieste separate.
-       Questo è più compatibile
-       con vecchi browser Tizen.
-    */
-
     function finished() {
 
 
@@ -1356,7 +1332,9 @@ function updatePrices() {
         ) {
 
 
-            if (valid > 0) {
+            if (
+                valid > 0
+            ) {
 
 
                 document.getElementById(
@@ -1375,12 +1353,11 @@ function updatePrices() {
                     "/4 crypto · " +
 
                     new Date()
-                        .toLocaleTimeString(
-                            "it-IT"
-                        ) +
+                    .toLocaleTimeString(
+                        "it-IT"
+                    ) +
 
                     " · CoinPaprika";
-
 
             }
             else {
@@ -1407,7 +1384,9 @@ function updatePrices() {
     }
 
 
-    function loadNext(index) {
+    function loadCoin(
+        index
+    ) {
 
 
         if (
@@ -1449,16 +1428,11 @@ function updatePrices() {
                 finished();
 
 
-                /*
-                   Aspettiamo un attimo
-                   prima della richiesta successiva.
-                */
-
                 setTimeout(
 
                     function() {
 
-                        loadNext(
+                        loadCoin(
                             index + 1
                         );
 
@@ -1475,7 +1449,7 @@ function updatePrices() {
     }
 
 
-    loadNext(0);
+    loadCoin(0);
 
 }
 
@@ -1493,22 +1467,9 @@ function updateHntChart() {
 
 
     /*
-       Prendiamo dati storici orari
-       per circa 24 ore.
+       Usiamo l'endpoint storico
+       di CoinPaprika.
     */
-
-    var now =
-        new Date();
-
-
-    var start =
-        new Date(
-
-            now.getTime() -
-            24 * 60 * 60 * 1000
-
-        );
-
 
     var url =
 
@@ -1518,17 +1479,9 @@ function updateHntChart() {
 
         "/historical" +
 
-        "?start=" +
+        "?start=2026-08-30T00:00:00Z" +
 
-        encodeURIComponent(
-            start.toISOString()
-        ) +
-
-        "&end=" +
-
-        encodeURIComponent(
-            now.toISOString()
-        ) +
+        "&end=2026-08-31T23:59:59Z" +
 
         "&interval=1h" +
 
@@ -1558,6 +1511,11 @@ function updateHntChart() {
             if (
                 xhr.status != 200
             ) {
+
+                document.getElementById(
+                    "chartResult"
+                ).innerHTML =
+                    "NO DATA";
 
                 return;
 
@@ -1600,6 +1558,7 @@ function updateHntChart() {
                         data[i].price !== undefined
                     ) {
 
+
                         points.push({
 
                             time:
@@ -1630,11 +1589,12 @@ function updateHntChart() {
                 }
 
             }
-            catch (error) {
+            catch (e) {
 
-                console.log(
-                    "Chart error"
-                );
+                document.getElementById(
+                    "chartResult"
+                ).innerHTML =
+                    "CHART ERROR";
 
             }
 
@@ -1644,9 +1604,10 @@ function updateHntChart() {
     xhr.onerror =
         function() {
 
-            console.log(
-                "Chart connection error"
-            );
+            document.getElementById(
+                "chartResult"
+            ).innerHTML =
+                "NO CONNECTION";
 
         };
 
@@ -1661,7 +1622,9 @@ function updateHntChart() {
    DISEGNA GRAFICO
 ===================================================== */
 
-function drawTrend(points) {
+function drawTrend(
+    points
+) {
 
 
     var canvas =
@@ -1688,33 +1651,23 @@ function drawTrend(points) {
     }
 
 
-    var ratio =
-        window.devicePixelRatio ||
-        1;
-
+    /*
+       Alcuni vecchi browser Tizen
+       gestiscono meglio una dimensione
+       fissa del canvas.
+    */
 
     canvas.width =
-        width * ratio;
-
+        width;
 
     canvas.height =
-        height * ratio;
+        height;
 
 
     var ctx =
         canvas.getContext(
             "2d"
         );
-
-
-    ctx.setTransform(
-        ratio,
-        0,
-        0,
-        ratio,
-        0,
-        0
-    );
 
 
     var left = 8;
@@ -1857,16 +1810,13 @@ function drawTrend(points) {
        Griglia.
     */
 
-    var gridCount = 5;
-
-
     ctx.font =
         "11px Arial";
 
 
     for (
         i = 0;
-        i <= gridCount;
+        i <= 5;
         i++
     ) {
 
@@ -1876,7 +1826,7 @@ function drawTrend(points) {
 
             (
                 i /
-                gridCount
+                5
             ) *
 
             chartHeight;
@@ -1899,8 +1849,12 @@ function drawTrend(points) {
 
 
         ctx.lineTo(
-            left + chartWidth,
+
+            left +
+            chartWidth,
+
             gy
+
         );
 
 
@@ -1913,7 +1867,7 @@ function drawTrend(points) {
 
             (
                 i /
-                gridCount
+                5
             ) *
 
             (
@@ -1942,7 +1896,7 @@ function drawTrend(points) {
 
 
     /*
-       Separatore scala.
+       Linea separatrice.
     */
 
     ctx.strokeStyle =
@@ -1955,8 +1909,7 @@ function drawTrend(points) {
     ctx.moveTo(
 
         left +
-        chartWidth +
-        1,
+        chartWidth,
 
         top
 
@@ -1966,8 +1919,7 @@ function drawTrend(points) {
     ctx.lineTo(
 
         left +
-        chartWidth +
-        1,
+        chartWidth,
 
         height -
         bottom
@@ -1980,7 +1932,7 @@ function drawTrend(points) {
 
 
     /*
-       Colore trend.
+       Colore.
     */
 
     var firstPrice =
@@ -2002,52 +1954,10 @@ function drawTrend(points) {
         : "#ff4d4d";
 
 
+
     /*
-       Area sotto la linea.
+       Area.
     */
-
-    var gradient =
-        ctx.createLinearGradient(
-
-            0,
-            top,
-            0,
-            height
-
-        );
-
-
-    if (
-        lastPrice >= firstPrice
-    ) {
-
-        gradient.addColorStop(
-            0,
-            "rgba(0,208,132,0.18)"
-        );
-
-
-        gradient.addColorStop(
-            1,
-            "rgba(0,208,132,0)"
-        );
-
-    }
-    else {
-
-        gradient.addColorStop(
-            0,
-            "rgba(255,77,77,0.18)"
-        );
-
-
-        gradient.addColorStop(
-            1,
-            "rgba(255,77,77,0)"
-        );
-
-    }
-
 
     ctx.beginPath();
 
@@ -2115,8 +2025,20 @@ function drawTrend(points) {
     ctx.closePath();
 
 
-    ctx.fillStyle =
-        gradient;
+    if (
+        lastPrice >= firstPrice
+    ) {
+
+        ctx.fillStyle =
+            "rgba(0,208,132,0.12)";
+
+    }
+    else {
+
+        ctx.fillStyle =
+            "rgba(255,77,77,0.12)";
+
+    }
 
 
     ctx.fill();
@@ -2176,14 +2098,6 @@ function drawTrend(points) {
     ctx.lineWidth = 3;
 
 
-    ctx.lineJoin =
-        "round";
-
-
-    ctx.lineCap =
-        "round";
-
-
     ctx.stroke();
 
 
@@ -2227,7 +2141,7 @@ function drawTrend(points) {
 
 
     /*
-       Linea prezzo attuale.
+       Linea orizzontale.
     */
 
     ctx.strokeStyle =
@@ -2252,8 +2166,12 @@ function drawTrend(points) {
 
 
     ctx.lineTo(
-        left + chartWidth,
+
+        left +
+        chartWidth,
+
         lastY
+
     );
 
 
@@ -2311,27 +2229,28 @@ function drawTrend(points) {
 
 
     /*
-       Variazione.
+       Variazione 24H.
     */
 
     var change =
 
         (
-            (lastPrice -
-             firstPrice) /
-
+            (
+                lastPrice -
+                firstPrice
+            ) /
             firstPrice
+        ) *
+        100;
 
-        ) * 100;
 
-
-    var chartResult =
+    var result =
         document.getElementById(
             "chartResult"
         );
 
 
-    chartResult.innerHTML =
+    result.innerHTML =
 
         (
             change >= 0
@@ -2344,91 +2263,8 @@ function drawTrend(points) {
         "%";
 
 
-    chartResult.style.color =
+    result.style.color =
         trendColor;
-
-
-
-    /*
-       Orari.
-    */
-
-    ctx.fillStyle =
-        "#555";
-
-
-    ctx.font =
-        "10px Arial";
-
-
-    var firstDate =
-        new Date(
-            points[0].time
-        );
-
-
-    var lastDate =
-        new Date(
-            points[
-                points.length - 1
-            ].time
-        );
-
-
-    var firstText =
-        firstDate.toLocaleTimeString(
-
-            "it-IT",
-
-            {
-                hour: "2-digit",
-                minute: "2-digit"
-            }
-
-        );
-
-
-    var lastText =
-        lastDate.toLocaleTimeString(
-
-            "it-IT",
-
-            {
-                hour: "2-digit",
-                minute: "2-digit"
-            }
-
-        );
-
-
-    ctx.fillText(
-
-        firstText,
-
-        left,
-
-        height - 5
-
-    );
-
-
-    var lastTextWidth =
-        ctx.measureText(
-            lastText
-        ).width;
-
-
-    ctx.fillText(
-
-        lastText,
-
-        left +
-        chartWidth -
-        lastTextWidth,
-
-        height - 5
-
-    );
 
 }
 
@@ -2443,10 +2279,6 @@ updatePrices();
 updateHntChart();
 
 
-/*
-   Aggiornamento prezzi.
-*/
-
 setInterval(
 
     updatePrices,
@@ -2456,10 +2288,6 @@ setInterval(
 );
 
 
-/*
-   Aggiornamento grafico.
-*/
-
 setInterval(
 
     updateHntChart,
@@ -2468,11 +2296,6 @@ setInterval(
 
 );
 
-
-/*
-   Ridisegna il grafico
-   quando cambia dimensione.
-*/
 
 window.onresize =
     function() {
