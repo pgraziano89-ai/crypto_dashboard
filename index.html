@@ -2,12 +2,16 @@
 <html lang="it">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TEST WRD</title>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>TEST WeRide WRD</title>
 
 <style>
+
 body {
     margin: 0;
     background: #050505;
@@ -23,16 +27,18 @@ h1 {
 }
 
 #price {
+    margin-top: 35px;
     font-size: 60px;
     font-weight: bold;
     color: #00d084;
-    margin-top: 30px;
 }
 
 #status {
-    color: #777;
     margin-top: 20px;
+    color: #777;
+    font-size: 16px;
 }
+
 </style>
 
 </head>
@@ -41,7 +47,9 @@ h1 {
 
 <h1>WeRide · WRD</h1>
 
-<div id="price">CARICAMENTO...</div>
+<div id="price">
+    CARICAMENTO...
+</div>
 
 <div id="status">
     Connessione...
@@ -49,18 +57,18 @@ h1 {
 
 <script>
 
+var API_KEY = "LA_TUA_API_KEY";
+
 function getWeRidePrice() {
 
     var xhr = new XMLHttpRequest();
 
-    /*
-       Yahoo Finance
-       WeRide = WRD
-       NASDAQ
-    */
-
     var url =
-        "https://query1.finance.yahoo.com/v8/finance/chart/WRD?range=1d&interval=1m";
+        "https://www.alphavantage.co/query" +
+        "?function=GLOBAL_QUOTE" +
+        "&symbol=WRD" +
+        "&apikey=" +
+        API_KEY;
 
     xhr.open(
         "GET",
@@ -74,42 +82,45 @@ function getWeRidePrice() {
             return;
         }
 
-        if (xhr.status === 200) {
+        if (xhr.status !== 200) {
 
-            try {
+            document.getElementById(
+                "price"
+            ).innerHTML =
+                "ERRORE " + xhr.status;
 
-                var data =
-                    JSON.parse(
-                        xhr.responseText
-                    );
+            document.getElementById(
+                "status"
+            ).innerHTML =
+                "Richiesta API fallita";
 
-                var result =
-                    data.chart.result[0];
+            return;
+        }
 
-                var meta =
-                    result.meta;
+        try {
+
+            var data =
+                JSON.parse(
+                    xhr.responseText
+                );
+
+            console.log(data);
+
+            if (
+                data["Global Quote"] &&
+                data["Global Quote"]["05. price"]
+            ) {
 
                 var price =
-                    meta.regularMarketPrice;
-
-                if (
-                    price === undefined ||
-                    price === null
-                ) {
-
-                    document.getElementById(
-                        "price"
-                    ).innerHTML =
-                        "PREZZO NON DISPONIBILE";
-
-                    return;
-                }
+                    Number(
+                        data["Global Quote"]["05. price"]
+                    );
 
                 document.getElementById(
                     "price"
                 ).innerHTML =
                     "$ " +
-                    Number(price).toFixed(2);
+                    price.toFixed(2);
 
                 document.getElementById(
                     "status"
@@ -118,33 +129,58 @@ function getWeRidePrice() {
                     new Date().toLocaleTimeString("it-IT");
 
             }
-            catch (e) {
+            else if (data["Note"]) {
 
                 document.getElementById(
                     "price"
                 ).innerHTML =
-                    "ERRORE DATI";
+                    "LIMITE API";
 
                 document.getElementById(
                     "status"
                 ).innerHTML =
-                    e.message;
+                    data["Note"];
+
+            }
+            else if (data["Information"]) {
+
+                document.getElementById(
+                    "price"
+                ).innerHTML =
+                    "API KEY";
+
+                document.getElementById(
+                    "status"
+                ).innerHTML =
+                    data["Information"];
+
+            }
+            else {
+
+                document.getElementById(
+                    "price"
+                ).innerHTML =
+                    "NO DATA";
+
+                document.getElementById(
+                    "status"
+                ).innerHTML =
+                    "WRD non restituito dall'API";
 
             }
 
         }
-        else {
+        catch (e) {
 
             document.getElementById(
                 "price"
             ).innerHTML =
-                "ERRORE " +
-                xhr.status;
+                "ERRORE JSON";
 
             document.getElementById(
                 "status"
             ).innerHTML =
-                "Impossibile leggere WRD";
+                e.message;
 
         }
 
@@ -160,7 +196,7 @@ function getWeRidePrice() {
         document.getElementById(
             "status"
         ).innerHTML =
-            "Connessione API fallita";
+            "Il browser non riesce a raggiungere Alpha Vantage";
 
     };
 
@@ -168,17 +204,9 @@ function getWeRidePrice() {
 }
 
 
-/* Prima richiesta */
+/* TEST */
 
 getWeRidePrice();
-
-
-/* Aggiornamento ogni 90 secondi */
-
-setInterval(
-    getWeRidePrice,
-    90000
-);
 
 </script>
 
