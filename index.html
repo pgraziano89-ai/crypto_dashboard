@@ -2,6 +2,7 @@
 <html lang="it">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -359,8 +360,17 @@ h1 {
     white-space: nowrap;
 }
 
+.weride-change {
+    margin-top: 8px;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    color: #777777;
+}
+
 .weride-label {
-    margin-top: 10px;
+    margin-top: 8px;
 
     color: #666666;
 
@@ -516,6 +526,7 @@ h1 {
 
     </div>
 
+
 </div>
 
 
@@ -586,6 +597,7 @@ h1 {
 
     </div>
 
+
 </div>
 
 
@@ -602,9 +614,7 @@ h1 {
 
     <div class="stock-card">
 
-
         <div class="stock-header">
-
 
             <svg
                 class="weride-logo"
@@ -641,7 +651,7 @@ h1 {
                 </div>
 
                 <div class="stock-subtitle">
-                    NASDAQ · USD · LIVE PRICE
+                    NASDAQ · USD · PRICE
                 </div>
 
             </div>
@@ -657,12 +667,17 @@ h1 {
                 ---
             </div>
 
+            <div
+                class="weride-change"
+                id="werideChange">
+                ---
+            </div>
+
             <div class="weride-label">
                 WE RIDE · WRD · NASDAQ
             </div>
 
         </div>
-
 
     </div>
 
@@ -689,9 +704,7 @@ h1 {
 ===================================================== */
 
 var PRICE_REFRESH = 90000;
-
 var CHART_REFRESH = 90000;
-
 var WERIDE_REFRESH = 60000;
 
 
@@ -725,9 +738,7 @@ function updatePrices() {
             if (
                 xhr.readyState != 4
             ) {
-
                 return;
-
             }
 
 
@@ -742,7 +753,6 @@ function updatePrices() {
                     "Connessione non disponibile";
 
                 return;
-
             }
 
 
@@ -770,7 +780,6 @@ function updatePrices() {
                     );
 
                     valid++;
-
                 }
 
 
@@ -788,7 +797,6 @@ function updatePrices() {
                     );
 
                     valid++;
-
                 }
 
 
@@ -806,7 +814,6 @@ function updatePrices() {
                     );
 
                     valid++;
-
                 }
 
 
@@ -824,7 +831,6 @@ function updatePrices() {
                     );
 
                     valid++;
-
                 }
 
 
@@ -881,7 +887,6 @@ function updatePrices() {
 
 
     xhr.send(null);
-
 }
 
 
@@ -911,7 +916,6 @@ function showCoin(
 
         changeId =
             "helium-change";
-
     }
 
 
@@ -919,7 +923,6 @@ function showCoin(
         document.getElementById(
             priceId
         );
-
 
     var changeElement =
         document.getElementById(
@@ -939,7 +942,6 @@ function showCoin(
     ) {
 
         decimals = 4;
-
     }
 
 
@@ -948,7 +950,6 @@ function showCoin(
     ) {
 
         decimals = 6;
-
     }
 
 
@@ -1017,32 +1018,40 @@ function showCoin(
 
 
 /* =====================================================
-   WE RIDE
-   PREZZO WRD
+   WE RIDE WRD
+   STOCKANALYSIS + R.JINA.AI
 ===================================================== */
 
 function updateWeRide() {
 
-    /*
-       Usiamo Yahoo Finance tramite
-       un proxy CORS pubblico.
+    var xhr =
+        new XMLHttpRequest();
 
-       Simbolo:
-       WRD = NASDAQ:WRD
+
+    /*
+       Richiesta tramite r.jina.ai.
+
+       Jina legge la pagina pubblica di StockAnalysis
+       e la restituisce come testo accessibile dal browser.
+
+       Pagina:
+       StockAnalysis / stocks / wrd
     */
 
     var url =
-        "https://query1.finance.yahoo.com/v8/finance/chart/WRD?range=1d&interval=1m";
-
-
-    var xhr =
-        new XMLHttpRequest();
+        "https://r.jina.ai/https://stockanalysis.com/stocks/wrd/";
 
 
     xhr.open(
         "GET",
         url,
         true
+    );
+
+
+    xhr.setRequestHeader(
+        "Accept",
+        "text/plain"
     );
 
 
@@ -1054,7 +1063,6 @@ function updateWeRide() {
             ) {
 
                 return;
-
             }
 
 
@@ -1062,271 +1070,263 @@ function updateWeRide() {
                 xhr.status != 200
             ) {
 
-                updateWeRideFallback();
+                document.getElementById(
+                    "weridePrice"
+                ).innerHTML =
+                    "---";
+
+                document.getElementById(
+                    "werideChange"
+                ).innerHTML =
+                    "DATI NON DISPONIBILI";
 
                 return;
-
-            }
-
-
-            try {
-
-                var data =
-                    JSON.parse(
-                        xhr.responseText
-                    );
-
-
-                if (
-                    data &&
-                    data.chart &&
-                    data.chart.result &&
-                    data.chart.result.length > 0
-                ) {
-
-                    var result =
-                        data.chart.result[0];
-
-
-                    var meta =
-                        result.meta;
-
-
-                    var price =
-                        null;
-
-
-                    /*
-                       currentPrice è il valore
-                       più aggiornato disponibile.
-                    */
-
-                    if (
-                        meta &&
-                        meta.regularMarketPrice !== undefined &&
-                        meta.regularMarketPrice !== null
-                    ) {
-
-                        price =
-                            Number(
-                                meta.regularMarketPrice
-                            );
-
-                    }
-
-
-                    /*
-                       Fallback sul timestamp
-                       più recente.
-                    */
-
-                    if (
-                        price === null ||
-                        isNaN(price)
-                    ) {
-
-                        var timestamps =
-                            result.timestamp;
-
-                        var quote =
-                            result.indicators &&
-                            result.indicators.quote &&
-                            result.indicators.quote[0];
-
-                        if (
-                            timestamps &&
-                            quote &&
-                            quote.close
-                        ) {
-
-                            var closes =
-                                quote.close;
-
-                            var i;
-
-                            for (
-                                i = closes.length - 1;
-                                i >= 0;
-                                i--
-                            ) {
-
-                                if (
-                                    closes[i] !== null &&
-                                    closes[i] !== undefined &&
-                                    !isNaN(closes[i])
-                                ) {
-
-                                    price =
-                                        Number(
-                                            closes[i]
-                                        );
-
-                                    break;
-
-                                }
-
-                            }
-
-                        }
-
-                    }
-
-
-                    if (
-                        price !== null &&
-                        !isNaN(price)
-                    ) {
-
-                        showWeRidePrice(
-                            price
-                        );
-
-                        return;
-
-                    }
-
-                }
-
-
-                updateWeRideFallback();
-
-            }
-            catch (e) {
-
-                updateWeRideFallback();
-
-            }
-
-        };
-
-
-    xhr.onerror =
-        function() {
-
-            updateWeRideFallback();
-
-        };
-
-
-    xhr.send(null);
-
-}
-
-
-/* =====================================================
-   FALLBACK WERIDE
-===================================================== */
-
-function updateWeRideFallback() {
-
-    var xhr =
-        new XMLHttpRequest();
-
-
-    /*
-       Endpoint Stooq come seconda fonte.
-    */
-
-    var url =
-        "https://stooq.com/q/l/?s=wrd.us&f=sd2t2ohlcv&h&e=csv";
-
-
-    xhr.open(
-        "GET",
-        url,
-        true
-    );
-
-
-    xhr.onreadystatechange =
-        function() {
-
-            if (
-                xhr.readyState != 4
-            ) {
-
-                return;
-
-            }
-
-
-            if (
-                xhr.status != 200
-            ) {
-
-                showWeRideError();
-
-                return;
-
             }
 
 
             try {
 
                 var text =
-                    xhr.responseText.trim();
-
-
-                var lines =
-                    text.split(/\r?\n/);
+                    xhr.responseText;
 
 
                 if (
-                    lines.length < 2
+                    !text ||
+                    text.length < 20
                 ) {
 
                     throw new Error(
-                        "No data"
+                        "Empty response"
                     );
 
                 }
-
-
-                var fields =
-                    lines[1].split(",");
 
 
                 /*
-                   CSV:
-                   Symbol,Date,Time,Open,High,Low,Close,Volume
+                   Cerchiamo il blocco iniziale
+                   della pagina StockAnalysis.
+
+                   Esempio:
+
+                   WeRide Inc. (WRD)
+                   NASDAQ: WRD · Real-Time Price · USD
+
+                   6.05
+
+                   +0.04 (0.67%)
+                */
+
+
+                var price = null;
+
+
+                /*
+                   Primo metodo:
+                   cerca "Real-Time Price · USD"
+                   e prende il primo numero
+                   nelle righe successive.
+                */
+
+                var realTimeMatch =
+                    text.match(
+                        /Real-Time Price[\s\S]{0,250}?USD[\s\S]{0,120}?(\d+(?:\.\d+)?)/i
+                    );
+
+
+                if (
+                    realTimeMatch
+                ) {
+
+                    price =
+                        parseFloat(
+                            realTimeMatch[1]
+                        );
+
+                }
+
+
+                /*
+                   Secondo metodo di sicurezza:
+                   cerca "NASDAQ: WRD"
+                   e poi il primo prezzo
+                   numerico vicino.
                 */
 
                 if (
-                    fields.length < 7
+                    price === null ||
+                    isNaN(price)
                 ) {
 
-                    throw new Error(
-                        "Invalid data"
-                    );
+                    var wrdMatch =
+                        text.match(
+                            /NASDAQ:\s*WRD[\s\S]{0,250}?(\d+\.\d{2,})/i
+                        );
+
+
+                    if (
+                        wrdMatch
+                    ) {
+
+                        price =
+                            parseFloat(
+                                wrdMatch[1]
+                            );
+
+                    }
 
                 }
 
 
-                var close =
-                    parseFloat(
-                        fields[6]
-                    );
-
+                /*
+                   Terzo metodo:
+                   cerca la riga "WeRide Inc. (WRD)"
+                   e analizza le righe immediatamente
+                   successive.
+                */
 
                 if (
-                    isNaN(close)
+                    price === null ||
+                    isNaN(price)
+                ) {
+
+                    var lines =
+                        text.split(/\r?\n/);
+
+
+                    var i;
+
+
+                    for (
+                        i = 0;
+                        i < lines.length;
+                        i++
+                    ) {
+
+                        if (
+                            /WeRide Inc\.\s*\(WRD\)/i.test(
+                                lines[i]
+                            )
+                        ) {
+
+                            var max =
+                                Math.min(
+                                    lines.length,
+                                    i + 12
+                                );
+
+
+                            var j;
+
+
+                            for (
+                                j = i + 1;
+                                j < max;
+                                j++
+                            ) {
+
+                                var clean =
+                                    lines[j]
+                                    .trim();
+
+
+                                /*
+                                   Prezzo con almeno
+                                   due decimali.
+                                */
+
+                                var match =
+                                    clean.match(
+                                        /^(\d+\.\d{2,})$/
+                                    );
+
+
+                                if (
+                                    match
+                                ) {
+
+                                    price =
+                                        parseFloat(
+                                            match[1]
+                                        );
+
+                                    break;
+                                }
+
+                            }
+
+
+                            if (
+                                price !== null
+                            ) {
+
+                                break;
+                            }
+
+                        }
+
+                    }
+
+                }
+
+
+                /*
+                   Controllo finale.
+                */
+
+                if (
+                    price === null ||
+                    isNaN(price) ||
+                    price <= 0 ||
+                    price > 10000
                 ) {
 
                     throw new Error(
-                        "Invalid price"
+                        "WRD price not found"
                     );
 
                 }
 
 
-                showWeRidePrice(
-                    close
-                );
+                /*
+                   Mostra prezzo.
+                */
+
+                document.getElementById(
+                    "weridePrice"
+                ).innerHTML =
+                    "$ " +
+                    price.toFixed(2);
+
+
+                /*
+                   Come richiesto:
+                   solo prezzo, senza variazione.
+                */
+
+                document.getElementById(
+                    "werideChange"
+                ).innerHTML =
+                    "WRD · PRICE";
+
+
+                document.getElementById(
+                    "werideChange"
+                ).className =
+                    "weride-change";
+
 
             }
             catch (e) {
 
-                showWeRideError();
+                document.getElementById(
+                    "weridePrice"
+                ).innerHTML =
+                    "---";
+
+                document.getElementById(
+                    "werideChange"
+                ).innerHTML =
+                    "DATI NON DISPONIBILI";
 
             }
 
@@ -1336,69 +1336,20 @@ function updateWeRideFallback() {
     xhr.onerror =
         function() {
 
-            showWeRideError();
+            document.getElementById(
+                "weridePrice"
+            ).innerHTML =
+                "---";
+
+            document.getElementById(
+                "werideChange"
+            ).innerHTML =
+                "ERRORE RETE";
 
         };
 
 
     xhr.send(null);
-
-}
-
-
-/* =====================================================
-   MOSTRA PREZZO WERIDE
-===================================================== */
-
-function showWeRidePrice(
-    price
-) {
-
-    var element =
-        document.getElementById(
-            "weridePrice"
-        );
-
-
-    if (!element) {
-        return;
-    }
-
-
-    element.innerHTML =
-        "$ " +
-        Number(price).toFixed(2);
-
-
-    element.style.color =
-        "#ffffff";
-
-}
-
-
-/* =====================================================
-   ERRORE WERIDE
-===================================================== */
-
-function showWeRideError() {
-
-    var element =
-        document.getElementById(
-            "weridePrice"
-        );
-
-
-    if (!element) {
-        return;
-    }
-
-
-    element.innerHTML =
-        "---";
-
-
-    element.style.color =
-        "#777777";
 
 }
 
@@ -1434,7 +1385,6 @@ function updateHntChart() {
             ) {
 
                 return;
-
             }
 
 
@@ -1448,7 +1398,6 @@ function updateHntChart() {
                     "NO DATA";
 
                 return;
-
             }
 
 
@@ -1472,16 +1421,13 @@ function updateHntChart() {
                         "NO DATA";
 
                     return;
-
                 }
 
 
                 var source =
                     data.prices;
 
-
                 var points = [];
-
 
                 var step =
                     Math.max(
@@ -1510,7 +1456,6 @@ function updateHntChart() {
                             Number(
                                 source[i][0]
                             );
-
 
                         var p =
                             Number(
@@ -1611,7 +1556,7 @@ function updateHntChart() {
 
 
 /* =====================================================
-   DISEGNA GRAFICO HNT
+   DISEGNA GRAFICO
 ===================================================== */
 
 function drawChart(
@@ -1632,7 +1577,6 @@ function drawChart(
     var width =
         canvas.clientWidth;
 
-
     var height =
         canvas.clientHeight;
 
@@ -1643,13 +1587,11 @@ function drawChart(
     ) {
 
         return;
-
     }
 
 
     canvas.width =
         width;
-
 
     canvas.height =
         height;
@@ -1667,11 +1609,8 @@ function drawChart(
 
 
     var left = 8;
-
     var right = 58;
-
     var top = 8;
-
     var bottom = 20;
 
 
@@ -1688,7 +1627,6 @@ function drawChart(
 
 
     var values = [];
-
 
     var i;
 
@@ -1732,13 +1670,11 @@ function drawChart(
 
         range =
             max * 0.01;
-
     }
 
 
     min -=
         range * 0.08;
-
 
     max +=
         range * 0.08;
@@ -1773,7 +1709,6 @@ function drawChart(
     ctx.fillStyle =
         "#0b0b0b";
 
-
     ctx.fillRect(
         0,
         0,
@@ -1805,24 +1740,19 @@ function drawChart(
         ctx.strokeStyle =
             "rgba(255,255,255,0.07)";
 
-
         ctx.lineWidth = 1;
 
-
         ctx.beginPath();
-
 
         ctx.moveTo(
             left,
             gy
         );
 
-
         ctx.lineTo(
             left + chartWidth,
             gy
         );
-
 
         ctx.stroke();
 
@@ -1856,7 +1786,6 @@ function drawChart(
     var firstPrice =
         values[0];
 
-
     var lastPrice =
         values[
             values.length - 1
@@ -1882,7 +1811,6 @@ function drawChart(
 
         var px =
             xPosition(i);
-
 
         var py =
             yPosition(
@@ -1950,7 +1878,6 @@ function drawChart(
         px =
             xPosition(i);
 
-
         py =
             yPosition(
                 values[i]
@@ -1982,17 +1909,13 @@ function drawChart(
     ctx.strokeStyle =
         color;
 
-
     ctx.lineWidth = 3;
-
 
     ctx.lineJoin =
         "round";
 
-
     ctx.lineCap =
         "round";
-
 
     ctx.stroke();
 
@@ -2026,7 +1949,6 @@ function drawChart(
     ctx.fillStyle =
         color;
 
-
     ctx.fill();
 
 
@@ -2035,9 +1957,7 @@ function drawChart(
     ctx.strokeStyle =
         color;
 
-
     ctx.lineWidth = 1;
-
 
     ctx.setLineDash(
         [4,4]
@@ -2136,7 +2056,6 @@ function drawChart(
 
     ctx.fillStyle =
         "#555";
-
 
     ctx.font =
         "10px Arial";
