@@ -18,69 +18,34 @@
 
 html,
 body {
-
     margin: 0;
     padding: 0;
-
     width: 100%;
     height: 100%;
-
     background: #050505;
     color: #ffffff;
-
     font-family: Arial, Helvetica, sans-serif;
-
     overflow: hidden;
 }
 
 body {
-
-    padding:
-        24px
-        8vw
-        15px
-        8vw;
-
+    padding: 24px 8vw 15px 8vw;
 }
-
-
-/* =====================================================
-   TITOLO
-===================================================== */
 
 h1 {
-
     text-align: center;
-
     font-size: 34px;
-
     letter-spacing: 6px;
-
-    margin:
-        0 0 17px 0;
-
+    margin: 0 0 17px 0;
 }
 
-
-/* =====================================================
-   TITOLI SEZIONE
-===================================================== */
-
 .section-title {
-
     color: #777777;
-
     font-size: 18px;
-
     letter-spacing: 4px;
-
-    border-bottom:
-        1px solid #292929;
-
+    border-bottom: 1px solid #292929;
     padding-bottom: 7px;
-
     margin-bottom: 12px;
-
 }
 
 
@@ -89,261 +54,163 @@ h1 {
 ===================================================== */
 
 .crypto-top {
-
     width: 100%;
-
     height: 145px;
-
-    white-space: nowrap;
-
-    font-size: 0;
-
+    display: flex;
+    gap: 2.4%;
 }
 
-
 .crypto-card {
-
-    display: inline-block;
-
-    vertical-align: top;
-
-    width: 32%;
-
+    flex: 1;
+    min-width: 0;
     height: 145px;
 
-    margin-right: 2%;
+    background: linear-gradient(
+        145deg,
+        #151515,
+        #0d0d0d
+    );
 
-    background:
-        linear-gradient(
-            145deg,
-            #151515,
-            #0d0d0d
-        );
-
-    border:
-        2px solid #292929;
-
+    border: 2px solid #292929;
     border-radius: 17px;
 
-    padding:
-        15px 15px;
+    padding: 15px 8px;
 
     text-align: center;
-
-    white-space: normal;
-
-    font-size: 16px;
 
     box-shadow:
         0 4px 18px
         rgba(0,0,0,0.35);
-
 }
-
-.crypto-card:last-child {
-
-    margin-right: 0;
-
-}
-
-
-/* =====================================================
-   TOKEN
-===================================================== */
 
 .token-header {
-
     text-align: center;
-
 }
 
 .logo {
-
     display: inline-block;
-
     vertical-align: middle;
 
     width: 42px;
-
     height: 42px;
 
     margin-right: 10px;
 
     border-radius: 50%;
-
 }
 
 .symbol {
-
     display: inline-block;
-
     vertical-align: middle;
 
     font-size: 27px;
-
     font-weight: bold;
-
 }
 
 .price {
-
     margin-top: 7px;
 
     font-size: 34px;
-
     font-weight: bold;
 
     white-space: nowrap;
-
 }
 
 .change {
-
     margin-top: 5px;
 
     font-size: 18px;
-
     font-weight: bold;
-
 }
 
 .up {
-
     color: #00d084;
-
 }
 
 .down {
-
     color: #ff4d4d;
-
 }
 
 
 /* =====================================================
-   HNT ROW
+   HNT
 ===================================================== */
 
 .hnt-row {
-
     width: 100%;
-
     height: 235px;
 
     margin-top: 16px;
 
-    white-space: nowrap;
-
-    font-size: 0;
-
+    display: flex;
+    gap: 2.2%;
 }
 
-
-/* =====================================================
-   HNT CARD
-===================================================== */
-
 .hnt-card {
-
-    display: inline-block;
-
-    vertical-align: top;
-
-    width: 31%;
+    flex: 0 0 31%;
+    min-width: 0;
 
     height: 235px;
 
-    margin-right: 2%;
+    background: linear-gradient(
+        145deg,
+        #151515,
+        #0d0d0d
+    );
 
-    background:
-        linear-gradient(
-            145deg,
-            #151515,
-            #0d0d0d
-        );
-
-    border:
-        2px solid #292929;
-
+    border: 2px solid #292929;
     border-radius: 17px;
 
     padding: 18px;
 
     text-align: center;
 
-    white-space: normal;
-
-    font-size: 16px;
-
     box-shadow:
         0 4px 18px
         rgba(0,0,0,0.35);
-
 }
 
-
-/* =====================================================
-   HNT HEADER
-===================================================== */
-
 .hnt-header {
-
     margin-top: 35px;
-
 }
 
 .hnt-logo {
-
     display: inline-block;
-
     vertical-align: middle;
 
     width: 43px;
-
     height: 43px;
 
     margin-right: 10px;
 
     border-radius: 50%;
-
 }
 
 .hnt-symbol {
-
     display: inline-block;
-
     vertical-align: middle;
 
     font-size: 28px;
-
     font-weight: bold;
-
 }
 
 .hnt-price {
-
     font-size: 42px;
-
     font-weight: bold;
 
     margin-top: 7px;
 
     white-space: nowrap;
-
 }
 
 .hnt-change {
-
     font-size: 20px;
-
     font-weight: bold;
 
     margin-top: 4px;
-
 }
 
 .hnt-label {
-
     color: #666666;
 
     font-size: 13px;
@@ -351,56 +218,38 @@ h1 {
     margin-top: 7px;
 
     letter-spacing: 1px;
-
 }
 
 
 /* =====================================================
-   CHART CARD
+   GRAFICO
 ===================================================== */
 
 .chart-card {
-
-    display: inline-block;
-
-    vertical-align: top;
-
-    width: 67%;
+    flex: 1;
+    min-width: 0;
 
     height: 235px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #151515,
-            #0d0d0d
-        );
+    background: linear-gradient(
+        145deg,
+        #151515,
+        #0d0d0d
+    );
 
-    border:
-        2px solid #292929;
-
+    border: 2px solid #292929;
     border-radius: 17px;
 
-    padding:
-        12px
-        12px
-        10px
-        12px;
-
-    white-space: normal;
-
-    font-size: 16px;
+    padding: 12px 15px 10px 15px;
 
     box-shadow:
         0 4px 18px
         rgba(0,0,0,0.35);
 
     overflow: hidden;
-
 }
 
 .chart-header {
-
     height: 20px;
 
     color: #888888;
@@ -408,39 +257,28 @@ h1 {
     font-size: 15px;
 
     letter-spacing: 1px;
-
 }
 
 .chart-left {
-
     float: left;
-
 }
 
 .chart-right {
-
     float: right;
 
     font-weight: bold;
-
 }
 
 .chart-area {
-
     width: 100%;
-
     height: 190px;
-
 }
 
 #hntChart {
-
     display: block;
 
     width: 100%;
-
     height: 190px;
-
 }
 
 
@@ -449,149 +287,70 @@ h1 {
 ===================================================== */
 
 .stock-section {
-
     margin-top: 16px;
-
 }
 
 .stock-card {
-
     width: 100%;
-
     height: 225px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #151515,
-            #0d0d0d
-        );
+    background: linear-gradient(
+        145deg,
+        #151515,
+        #0d0d0d
+    );
 
-    border:
-        2px solid #292929;
-
+    border: 2px solid #292929;
     border-radius: 17px;
 
-    padding:
-        15px
-        22px
-        14px
-        22px;
+    padding: 15px 22px 14px 22px;
 
     box-shadow:
         0 4px 18px
         rgba(0,0,0,0.35);
 
     overflow: hidden;
-
 }
 
 .stock-header {
-
     height: 55px;
-
 }
 
 .weride-logo {
-
     display: inline-block;
-
     vertical-align: middle;
 
     width: 48px;
-
     height: 48px;
 
     margin-right: 14px;
-
 }
 
 .stock-info {
-
     display: inline-block;
-
     vertical-align: middle;
-
 }
 
 .stock-title {
-
     font-size: 27px;
-
     font-weight: bold;
-
 }
 
 .stock-subtitle {
-
     color: #777777;
 
     font-size: 14px;
 
     margin-top: 3px;
-
 }
-
-
-/* =====================================================
-   PREZZO WRD
-===================================================== */
-
-.wrd-price-box {
-
-    display: inline-block;
-
-    vertical-align: middle;
-
-    margin-left: 35px;
-
-}
-
-.wrd-price {
-
-    font-size: 34px;
-
-    font-weight: bold;
-
-    white-space: nowrap;
-
-}
-
-.wrd-change {
-
-    font-size: 17px;
-
-    font-weight: bold;
-
-    margin-top: 4px;
-
-}
-
-.wrd-label {
-
-    color: #666666;
-
-    font-size: 12px;
-
-    margin-top: 4px;
-
-}
-
-
-/* =====================================================
-   TRADINGVIEW
-===================================================== */
 
 .tradingview-wrapper {
-
     width: 100%;
-
     height: 145px;
 
     margin-top: 5px;
 
     overflow: hidden;
-
 }
 
 
@@ -600,7 +359,6 @@ h1 {
 ===================================================== */
 
 #updated {
-
     text-align: center;
 
     color: #777777;
@@ -608,15 +366,12 @@ h1 {
     font-size: 13px;
 
     margin-top: 7px;
-
 }
 
 .status {
-
     display: inline-block;
 
     width: 8px;
-
     height: 8px;
 
     background: #00d084;
@@ -624,13 +379,10 @@ h1 {
     border-radius: 50%;
 
     margin-right: 5px;
-
 }
 
 .status.old {
-
     background: #ffb000;
-
 }
 
 </style>
@@ -674,17 +426,13 @@ h1 {
         <div
             class="price"
             id="bitcoin">
-
             ---
-
         </div>
 
         <div
             class="change"
             id="bitcoin-change">
-
             ---
-
         </div>
 
     </div>
@@ -710,17 +458,13 @@ h1 {
         <div
             class="price"
             id="ethereum">
-
             ---
-
         </div>
 
         <div
             class="change"
             id="ethereum-change">
-
             ---
-
         </div>
 
     </div>
@@ -746,24 +490,19 @@ h1 {
         <div
             class="price"
             id="solana">
-
             ---
-
         </div>
 
         <div
             class="change"
             id="solana-change">
-
             ---
-
         </div>
 
     </div>
 
 
 </div>
-
 
 
 <!-- =====================================================
@@ -791,27 +530,23 @@ h1 {
         <div
             class="hnt-price"
             id="helium">
-
             ---
-
         </div>
 
         <div
             class="hnt-change"
             id="helium-change">
-
             ---
-
         </div>
 
         <div class="hnt-label">
-
             HELIUM · USD · 24H
-
         </div>
 
     </div>
 
+
+    <!-- GRAFICO -->
 
     <div class="chart-card">
 
@@ -824,18 +559,14 @@ h1 {
             <span
                 class="chart-right"
                 id="chartResult">
-
                 ---
-
             </span>
 
         </div>
 
         <div class="chart-area">
 
-            <canvas
-                id="hntChart">
-            </canvas>
+            <canvas id="hntChart"></canvas>
 
         </div>
 
@@ -843,7 +574,6 @@ h1 {
 
 
 </div>
-
 
 
 <!-- =====================================================
@@ -859,9 +589,7 @@ h1 {
 
     <div class="stock-card">
 
-
         <div class="stock-header">
-
 
             <svg
                 class="weride-logo"
@@ -881,13 +609,7 @@ h1 {
                     fill="#111111"/>
 
                 <path
-                    d="M26 53
-                       L36 53
-                       L43 34
-                       L51 66
-                       L60 42
-                       L67 53
-                       L75 53"
+                    d="M26 53 L36 53 L43 34 L51 66 L60 42 L67 53 L75 53"
                     fill="none"
                     stroke="#ffffff"
                     stroke-width="6"
@@ -904,47 +626,19 @@ h1 {
                 </div>
 
                 <div class="stock-subtitle">
-                    NASDAQ · USD
+                    NASDAQ · USD · TradingView
                 </div>
 
             </div>
-
-
-            <div class="wrd-price-box">
-
-                <div
-                    class="wrd-price"
-                    id="wrd-price">
-
-                    ---
-
-                </div>
-
-                <div
-                    class="wrd-change"
-                    id="wrd-change">
-
-                    ---
-
-                </div>
-
-                <div class="wrd-label">
-                    PREZZO WRD
-                </div>
-
-            </div>
-
 
         </div>
 
 
         <div class="tradingview-wrapper">
 
-            <div
-                class="tradingview-widget-container">
+            <div class="tradingview-widget-container">
 
-                <div
-                    class="tradingview-widget-container__widget">
+                <div class="tradingview-widget-container__widget">
                 </div>
 
                 <script
@@ -968,11 +662,9 @@ h1 {
 
         </div>
 
-
     </div>
 
 </div>
-
 
 
 <div id="updated">
@@ -987,7 +679,6 @@ h1 {
 </div>
 
 
-
 <script>
 
 
@@ -995,85 +686,26 @@ h1 {
    CONFIGURAZIONE
 ===================================================== */
 
-/*
-   60.000 millisecondi = 1 minuto
-*/
-
-var PRICE_REFRESH = 60000;
-
-var CHART_REFRESH = 60000;
-
-var STOCK_REFRESH = 60000;
+var PRICE_REFRESH = 300000;
+var CHART_REFRESH = 300000;
 
 
 /* =====================================================
-   COINGECKO
+   PREZZI COINGECKO
 ===================================================== */
 
-var COINS = {
-
-    bitcoin: "bitcoin",
-
-    ethereum: "ethereum",
-
-    solana: "solana",
-
-    helium: "helium"
-
-};
-
-
-/* =====================================================
-   FORMATTA PREZZO
-===================================================== */
-
-function formatPrice(price) {
-
-    if (
-        price === null ||
-        price === undefined ||
-        isNaN(price)
-    ) {
-
-        return "---";
-
-    }
-
-    var decimals = 2;
-
-    if (price < 1) {
-
-        decimals = 4;
-
-    }
-
-    if (price < 0.01) {
-
-        decimals = 6;
-
-    }
-
-    return "$ " +
-        Number(price).toFixed(decimals);
-
-}
-
-
-/* =====================================================
-   RICHIESTA COIN
-===================================================== */
-
-function requestCoin(name, callback) {
+function updatePrices() {
 
     var xhr =
         new XMLHttpRequest();
 
+
     var url =
         "https://api.coingecko.com/api/v3/simple/price" +
-        "?ids=" +
-        COINS[name] +
+        "?ids=bitcoin,ethereum,solana,helium" +
         "&vs_currencies=usd" +
         "&include_24hr_change=true";
+
 
     xhr.open(
         "GET",
@@ -1081,50 +713,143 @@ function requestCoin(name, callback) {
         true
     );
 
+
     xhr.onreadystatechange =
         function() {
 
             if (
                 xhr.readyState != 4
             ) {
-
                 return;
-
             }
+
 
             if (
-                xhr.status == 200
+                xhr.status != 200
             ) {
 
-                try {
+                document.getElementById(
+                    "updated"
+                ).innerHTML =
+                    '<span class="status old"></span>' +
+                    "Connessione non disponibile";
 
-                    var data =
-                        JSON.parse(
-                            xhr.responseText
-                        );
+                return;
+            }
 
-                    callback(
-                        name,
-                        data
+
+            try {
+
+                var data =
+                    JSON.parse(
+                        xhr.responseText
                     );
+
+                var valid = 0;
+
+
+                /* BTC */
+
+                if (
+                    data.bitcoin &&
+                    data.bitcoin.usd !== undefined
+                ) {
+
+                    showCoin(
+                        "bitcoin",
+                        data.bitcoin.usd,
+                        data.bitcoin.usd_24h_change
+                    );
+
+                    valid++;
+                }
+
+
+                /* ETH */
+
+                if (
+                    data.ethereum &&
+                    data.ethereum.usd !== undefined
+                ) {
+
+                    showCoin(
+                        "ethereum",
+                        data.ethereum.usd,
+                        data.ethereum.usd_24h_change
+                    );
+
+                    valid++;
+                }
+
+
+                /* SOL */
+
+                if (
+                    data.solana &&
+                    data.solana.usd !== undefined
+                ) {
+
+                    showCoin(
+                        "solana",
+                        data.solana.usd,
+                        data.solana.usd_24h_change
+                    );
+
+                    valid++;
+                }
+
+
+                /* HNT */
+
+                if (
+                    data.helium &&
+                    data.helium.usd !== undefined
+                ) {
+
+                    showCoin(
+                        "helium",
+                        data.helium.usd,
+                        data.helium.usd_24h_change
+                    );
+
+                    valid++;
+                }
+
+
+                if (
+                    valid > 0
+                ) {
+
+                    document.getElementById(
+                        "updated"
+                    ).innerHTML =
+
+                        '<span class="status"></span>' +
+                        valid +
+                        "/4 crypto · " +
+                        new Date()
+                        .toLocaleTimeString("it-IT") +
+                        " · CoinGecko";
 
                 }
-                catch (e) {
+                else {
 
-                    callback(
-                        name,
-                        null
-                    );
+                    document.getElementById(
+                        "updated"
+                    ).innerHTML =
+                        '<span class="status old"></span>' +
+                        "Dati non disponibili";
 
                 }
 
             }
-            else {
+            catch (e) {
 
-                callback(
-                    name,
-                    null
-                );
+                document.getElementById(
+                    "updated"
+                ).innerHTML =
+                    '<span class="status old"></span>' +
+                    "Errore dati";
 
             }
 
@@ -1134,74 +859,80 @@ function requestCoin(name, callback) {
     xhr.onerror =
         function() {
 
-            callback(
-                name,
-                null
-            );
+            document.getElementById(
+                "updated"
+            ).innerHTML =
+                '<span class="status old"></span>' +
+                "Errore rete";
 
         };
 
 
     xhr.send(null);
-
 }
 
 
 /* =====================================================
-   MOSTRA COIN
+   MOSTRA PREZZO
 ===================================================== */
 
-function displayCoin(
+function showCoin(
     name,
-    data
+    price,
+    change
 ) {
 
-    if (
-        !data ||
-        !data[COINS[name]]
-    ) {
+    var priceId =
+        name;
 
-        return false;
-
-    }
-
-
-    var coin =
-        data[COINS[name]];
-
-
-    var price =
-        Number(
-            coin.usd
-        );
-
-
-    var change =
-        Number(
-            coin.usd_24h_change
-        );
+    var changeId =
+        name + "-change";
 
 
     if (
-        isNaN(price)
+        name == "helium"
     ) {
 
-        return false;
+        priceId =
+            "helium";
 
+        changeId =
+            "helium-change";
     }
 
 
     var priceElement =
         document.getElementById(
-            name
+            priceId
         );
-
 
     var changeElement =
         document.getElementById(
-            name +
-            "-change"
+            changeId
         );
+
+
+    var number =
+        Number(price);
+
+
+    var decimals = 2;
+
+
+    if (
+        number < 1
+    ) {
+
+        decimals = 4;
+    }
+
+
+    if (
+        number < 0.01
+    ) {
+
+        decimals = 6;
+    }
 
 
     if (
@@ -1209,8 +940,9 @@ function displayCoin(
     ) {
 
         priceElement.innerHTML =
-            formatPrice(
-                price
+            "$ " +
+            number.toFixed(
+                decimals
             );
 
     }
@@ -1218,187 +950,51 @@ function displayCoin(
 
     if (
         changeElement &&
+        change !== undefined &&
+        change !== null &&
         !isNaN(change)
     ) {
 
-        var arrow =
-            change >= 0
-            ? "▲ "
-            : "▼ ";
+        var ch =
+            Number(change);
 
 
         changeElement.innerHTML =
-
-            arrow +
-
-            Math.abs(
-                change
-            ).toFixed(2) +
-
+            (
+                ch >= 0
+                ? "▲ "
+                : "▼ "
+            ) +
+            Math.abs(ch).toFixed(2) +
             "%";
 
 
-        changeElement.className =
-
-            "change " +
-
-            (
-                change >= 0
-                ? "up"
-                : "down"
-            );
-
-    }
-
-
-    return true;
-
-}
-
-
-/* =====================================================
-   AGGIORNA PREZZI CRYPTO
-===================================================== */
-
-function updatePrices() {
-
-    var names = [
-
-        "bitcoin",
-        "ethereum",
-        "solana",
-        "helium"
-
-    ];
-
-
-    var completed = 0;
-
-    var valid = 0;
-
-
-    function complete() {
-
-        completed++;
-
-
         if (
-            completed >=
-            names.length
+            name == "helium"
         ) {
 
-            if (
-                valid > 0
-            ) {
-
-                document.getElementById(
-                    "status"
-                ).className =
-                    "status";
-
-
-                document.getElementById(
-                    "updated"
-                ).innerHTML =
-
-                    '<span class="status"></span>' +
-
-                    valid +
-                    "/4 crypto · " +
-
-                    new Date()
-                    .toLocaleTimeString(
-                        "it-IT"
-                    ) +
-
-                    " · CoinGecko";
-
-            }
-            else {
-
-                document.getElementById(
-                    "status"
-                ).className =
-                    "status old";
-
-
-                document.getElementById(
-                    "updated"
-                ).innerHTML =
-
-                    '<span class="status old"></span>' +
-
-                    "Connessione crypto non disponibile";
-
-            }
-
-        }
-
-    }
-
-
-    function next(index) {
-
-        if (
-            index >=
-            names.length
-        ) {
-
-            return;
-
-        }
-
-
-        var name =
-            names[index];
-
-
-        requestCoin(
-
-            name,
-
-            function(
-                returnedName,
-                data
-            ) {
-
-                if (
-                    displayCoin(
-                        returnedName,
-                        data
-                    )
-                ) {
-
-                    valid++;
-
-                }
-
-
-                complete();
-
-
-                setTimeout(
-
-                    function() {
-
-                        next(
-                            index + 1
-                        );
-
-                    },
-
-                    250
-
+            changeElement.className =
+                "hnt-change " +
+                (
+                    ch >= 0
+                    ? "up"
+                    : "down"
                 );
 
-            }
+        }
+        else {
 
-        );
+            changeElement.className =
+                "change " +
+                (
+                    ch >= 0
+                    ? "up"
+                    : "down"
+                );
+
+        }
 
     }
-
-
-    next(0);
 
 }
 
@@ -1414,11 +1010,8 @@ function updateHntChart() {
 
 
     var url =
-
         "https://api.coingecko.com/api/v3/coins/helium/market_chart" +
-
         "?vs_currency=usd" +
-
         "&days=1";
 
 
@@ -1437,7 +1030,6 @@ function updateHntChart() {
             ) {
 
                 return;
-
             }
 
 
@@ -1451,22 +1043,21 @@ function updateHntChart() {
                     "NO DATA";
 
                 return;
-
             }
 
 
             try {
 
-                var result =
+                var data =
                     JSON.parse(
                         xhr.responseText
                     );
 
 
                 if (
-                    !result ||
-                    !result.prices ||
-                    result.prices.length < 2
+                    !data ||
+                    !data.prices ||
+                    data.prices.length < 2
                 ) {
 
                     document.getElementById(
@@ -1475,22 +1066,19 @@ function updateHntChart() {
                         "NO DATA";
 
                     return;
-
                 }
 
 
+                var source =
+                    data.prices;
+
                 var points = [];
-
-                var prices =
-                    result.prices;
-
 
                 var step =
                     Math.max(
                         1,
                         Math.floor(
-                            prices.length /
-                            60
+                            source.length / 50
                         )
                     );
 
@@ -1500,28 +1088,41 @@ function updateHntChart() {
 
                 for (
                     i = 0;
-                    i < prices.length;
+                    i < source.length;
                     i += step
                 ) {
 
                     if (
-                        prices[i] &&
-                        prices[i].length >= 2
+                        source[i] &&
+                        source[i].length >= 2
                     ) {
 
-                        points.push({
+                        var t =
+                            Number(
+                                source[i][0]
+                            );
 
-                            time:
-                                Number(
-                                    prices[i][0]
-                                ),
+                        var p =
+                            Number(
+                                source[i][1]
+                            );
 
-                            price:
-                                Number(
-                                    prices[i][1]
-                                )
 
-                        });
+                        if (
+                            !isNaN(t) &&
+                            !isNaN(p) &&
+                            p > 0
+                        ) {
+
+                            points.push({
+
+                                time: t,
+
+                                price: p
+
+                            });
+
+                        }
 
                     }
 
@@ -1529,8 +1130,8 @@ function updateHntChart() {
 
 
                 var last =
-                    prices[
-                        prices.length - 1
+                    source[
+                        source.length - 1
                     ];
 
 
@@ -1542,14 +1143,10 @@ function updateHntChart() {
                     points.push({
 
                         time:
-                            Number(
-                                last[0]
-                            ),
+                            Number(last[0]),
 
                         price:
-                            Number(
-                                last[1]
-                            )
+                            Number(last[1])
 
                     });
 
@@ -1575,7 +1172,7 @@ function updateHntChart() {
                 }
 
             }
-            catch (error) {
+            catch (e) {
 
                 document.getElementById(
                     "chartResult"
@@ -1607,7 +1204,9 @@ function updateHntChart() {
    DISEGNA GRAFICO
 ===================================================== */
 
-function drawChart(points) {
+function drawChart(
+    points
+) {
 
     var canvas =
         document.getElementById(
@@ -1615,9 +1214,13 @@ function drawChart(points) {
         );
 
 
+    if (!canvas) {
+        return;
+    }
+
+
     var width =
         canvas.clientWidth;
-
 
     var height =
         canvas.clientHeight;
@@ -1629,13 +1232,11 @@ function drawChart(points) {
     ) {
 
         return;
-
     }
 
 
     canvas.width =
         width;
-
 
     canvas.height =
         height;
@@ -1647,12 +1248,14 @@ function drawChart(points) {
         );
 
 
+    if (!ctx) {
+        return;
+    }
+
+
     var left = 8;
-
-    var right = 62;
-
+    var right = 58;
     var top = 8;
-
     var bottom = 20;
 
 
@@ -1680,7 +1283,9 @@ function drawChart(points) {
     ) {
 
         values.push(
-            points[i].price
+            Number(
+                points[i].price
+            )
         );
 
     }
@@ -1710,13 +1315,11 @@ function drawChart(points) {
 
         range =
             max * 0.01;
-
     }
 
 
     min -=
         range * 0.08;
-
 
     max +=
         range * 0.08;
@@ -1725,12 +1328,10 @@ function drawChart(points) {
     function xPosition(index) {
 
         return left +
-
             (
                 index /
                 (values.length - 1)
             ) *
-
             chartWidth;
 
     }
@@ -1739,20 +1340,19 @@ function drawChart(points) {
     function yPosition(price) {
 
         return top +
-
             (
                 (max - price) /
                 (max - min)
             ) *
-
             chartHeight;
 
     }
 
 
+    /* sfondo */
+
     ctx.fillStyle =
         "#0b0b0b";
-
 
     ctx.fillRect(
         0,
@@ -1762,8 +1362,10 @@ function drawChart(points) {
     );
 
 
+    /* griglia */
+
     ctx.font =
-        "11px Arial";
+        "10px Arial";
 
 
     for (
@@ -1773,55 +1375,38 @@ function drawChart(points) {
     ) {
 
         var gy =
-
             top +
-
             (
-                i /
-                5
+                i / 5
             ) *
-
             chartHeight;
 
 
         ctx.strokeStyle =
             "rgba(255,255,255,0.07)";
 
-
         ctx.lineWidth = 1;
 
-
         ctx.beginPath();
-
 
         ctx.moveTo(
             left,
             gy
         );
 
-
         ctx.lineTo(
-
-            left +
-            chartWidth,
-
+            left + chartWidth,
             gy
-
         );
-
 
         ctx.stroke();
 
 
         var gridPrice =
-
             max -
-
             (
-                i /
-                5
+                i / 5
             ) *
-
             (
                 max - min
             );
@@ -1832,55 +1417,19 @@ function drawChart(points) {
 
 
         ctx.fillText(
-
             "$" +
             gridPrice.toFixed(3),
-
-            width -
-            right +
-            6,
-
-            gy + 4
-
+            width - right + 4,
+            gy + 3
         );
 
     }
 
 
-    ctx.strokeStyle =
-        "rgba(255,255,255,0.15)";
-
-
-    ctx.beginPath();
-
-
-    ctx.moveTo(
-
-        left +
-        chartWidth,
-
-        top
-
-    );
-
-
-    ctx.lineTo(
-
-        left +
-        chartWidth,
-
-        height -
-        bottom
-
-    );
-
-
-    ctx.stroke();
-
+    /* colore */
 
     var firstPrice =
         values[0];
-
 
     var lastPrice =
         values[
@@ -1889,15 +1438,12 @@ function drawChart(points) {
 
 
     var color =
-
         lastPrice >= firstPrice
-
         ? "#00d084"
-
         : "#ff4d4d";
 
 
-    /* AREA */
+    /* area */
 
     ctx.beginPath();
 
@@ -1910,7 +1456,6 @@ function drawChart(points) {
 
         var px =
             xPosition(i);
-
 
         var py =
             yPosition(
@@ -1941,23 +1486,14 @@ function drawChart(points) {
 
 
     ctx.lineTo(
-
-        left +
-        chartWidth,
-
-        height -
-        bottom
-
+        left + chartWidth,
+        height - bottom
     );
 
 
     ctx.lineTo(
-
         left,
-
-        height -
-        bottom
-
+        height - bottom
     );
 
 
@@ -1965,18 +1501,15 @@ function drawChart(points) {
 
 
     ctx.fillStyle =
-
         lastPrice >= firstPrice
-
         ? "rgba(0,208,132,0.12)"
-
         : "rgba(255,77,77,0.12)";
 
 
     ctx.fill();
 
 
-    /* LINE */
+    /* linea */
 
     ctx.beginPath();
 
@@ -1989,7 +1522,6 @@ function drawChart(points) {
 
         px =
             xPosition(i);
-
 
         py =
             yPosition(
@@ -2022,7 +1554,6 @@ function drawChart(points) {
     ctx.strokeStyle =
         color;
 
-
     ctx.lineWidth = 3;
 
     ctx.lineJoin =
@@ -2031,11 +1562,10 @@ function drawChart(points) {
     ctx.lineCap =
         "round";
 
-
     ctx.stroke();
 
 
-    /* ULTIMO PUNTO */
+    /* ultimo punto */
 
     var lastX =
         xPosition(
@@ -2053,31 +1583,26 @@ function drawChart(points) {
 
 
     ctx.arc(
-
         lastX,
         lastY,
         4,
         0,
         Math.PI * 2
-
     );
 
 
     ctx.fillStyle =
         color;
 
-
     ctx.fill();
 
 
-    /* LINEA PREZZO */
+    /* linea prezzo */
 
     ctx.strokeStyle =
         color;
 
-
     ctx.lineWidth = 1;
-
 
     ctx.setLineDash(
         [4,4]
@@ -2094,12 +1619,8 @@ function drawChart(points) {
 
 
     ctx.lineTo(
-
-        left +
-        chartWidth,
-
+        left + chartWidth,
         lastY
-
     );
 
 
@@ -2109,24 +1630,17 @@ function drawChart(points) {
     ctx.setLineDash([]);
 
 
-    /* BOX PREZZO */
+    /* box prezzo */
 
     ctx.fillStyle =
         color;
 
 
     ctx.fillRect(
-
-        width -
-        right +
-        2,
-
+        width - right + 2,
         lastY - 10,
-
         right - 4,
-
         20
-
     );
 
 
@@ -2135,27 +1649,20 @@ function drawChart(points) {
 
 
     ctx.font =
-        "bold 11px Arial";
+        "bold 10px Arial";
 
 
     ctx.fillText(
-
         "$" +
         lastPrice.toFixed(3),
-
-        width -
-        right +
-        6,
-
-        lastY + 4
-
+        width - right + 5,
+        lastY + 3
     );
 
 
-    /* VARIAZIONE */
+    /* variazione */
 
     var change =
-
         (
             (
                 lastPrice -
@@ -2172,28 +1679,27 @@ function drawChart(points) {
         );
 
 
-    result.innerHTML =
+    if (result) {
 
-        (
-            change >= 0
-            ? "+"
-            : ""
-        ) +
+        result.innerHTML =
+            (
+                change >= 0
+                ? "+"
+                : ""
+            ) +
+            change.toFixed(2) +
+            "%";
 
-        change.toFixed(2) +
+        result.style.color =
+            color;
 
-        "%";
-
-
-    result.style.color =
-        color;
+    }
 
 
-    /* ORARI */
+    /* orari */
 
     ctx.fillStyle =
         "#555";
-
 
     ctx.font =
         "10px Arial";
@@ -2214,43 +1720,29 @@ function drawChart(points) {
 
 
     var firstText =
-
-        firstDate
-        .toLocaleTimeString(
-
+        firstDate.toLocaleTimeString(
             "it-IT",
-
             {
                 hour: "2-digit",
                 minute: "2-digit"
             }
-
         );
 
 
     var lastText =
-
-        lastDate
-        .toLocaleTimeString(
-
+        lastDate.toLocaleTimeString(
             "it-IT",
-
             {
                 hour: "2-digit",
                 minute: "2-digit"
             }
-
         );
 
 
     ctx.fillText(
-
         firstText,
-
         left,
-
         height - 5
-
     );
 
 
@@ -2261,216 +1753,10 @@ function drawChart(points) {
 
 
     ctx.fillText(
-
         lastText,
-
-        left +
-        chartWidth -
-        textWidth,
-
+        left + chartWidth - textWidth,
         height - 5
-
     );
-
-}
-
-
-/* =====================================================
-   WRD
-===================================================== */
-
-/*
-   Proviamo una fonte pubblica.
-   Se la richiesta viene bloccata,
-   NON cancelliamo un eventuale prezzo
-   già visualizzato.
-*/
-
-function updateWrd() {
-
-    var xhr =
-        new XMLHttpRequest();
-
-
-    /*
-       Endpoint pubblico Yahoo Finance.
-       Alcuni browser possono bloccarlo
-       per CORS; in quel caso il prezzo
-       rimane invariato.
-    */
-
-    var url =
-
-        "https://query1.finance.yahoo.com/v8/finance/chart/WRD" +
-
-        "?interval=1d" +
-
-        "&range=1d";
-
-
-    xhr.open(
-        "GET",
-        url,
-        true
-    );
-
-
-    xhr.onreadystatechange =
-        function() {
-
-            if (
-                xhr.readyState != 4
-            ) {
-
-                return;
-
-            }
-
-
-            if (
-                xhr.status != 200
-            ) {
-
-                return;
-
-            }
-
-
-            try {
-
-                var data =
-                    JSON.parse(
-                        xhr.responseText
-                    );
-
-
-                if (
-                    !data ||
-                    !data.chart ||
-                    !data.chart.result ||
-                    !data.chart.result[0]
-                ) {
-
-                    return;
-
-                }
-
-
-                var result =
-                    data.chart.result[0];
-
-
-                var meta =
-                    result.meta;
-
-
-                if (
-                    !meta
-                ) {
-
-                    return;
-
-                }
-
-
-                var price =
-                    Number(
-                        meta.regularMarketPrice
-                    );
-
-
-                var previous =
-                    Number(
-                        meta.previousClose
-                    );
-
-
-                if (
-                    isNaN(price)
-                ) {
-
-                    return;
-
-                }
-
-
-                document.getElementById(
-                    "wrd-price"
-                ).innerHTML =
-
-                    "$ " +
-                    price.toFixed(2);
-
-
-                if (
-                    !isNaN(previous) &&
-                    previous > 0
-                ) {
-
-                    var change =
-
-                        (
-                            (
-                                price -
-                                previous
-                            ) /
-                            previous
-                        ) *
-                        100;
-
-
-                    var changeElement =
-                        document.getElementById(
-                            "wrd-change"
-                        );
-
-
-                    changeElement.innerHTML =
-
-                        (
-                            change >= 0
-                            ? "▲ "
-                            : "▼ "
-                        ) +
-
-                        Math.abs(
-                            change
-                        ).toFixed(2) +
-
-                        "%";
-
-
-                    changeElement.className =
-
-                        "wrd-change " +
-
-                        (
-                            change >= 0
-                            ? "up"
-                            : "down"
-                        );
-
-                }
-
-            }
-            catch (e) {
-
-                return;
-
-            }
-
-        };
-
-
-    xhr.onerror =
-        function() {
-
-            return;
-
-        };
-
-
-    xhr.send(null);
 
 }
 
@@ -2483,41 +1769,22 @@ updatePrices();
 
 updateHntChart();
 
-updateWrd();
-
 
 /* =====================================================
-   AGGIORNAMENTO OGNI 1 MINUTO
+   AGGIORNAMENTO
 ===================================================== */
 
 setInterval(
-
     updatePrices,
-
     PRICE_REFRESH
-
 );
 
-
 setInterval(
-
     updateHntChart,
-
     CHART_REFRESH
-
-);
-
-
-setInterval(
-
-    updateWrd,
-
-    STOCK_REFRESH
-
 );
 
 </script>
-
 
 </body>
 
