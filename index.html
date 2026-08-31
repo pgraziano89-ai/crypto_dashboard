@@ -10,11 +10,17 @@
 
 <title>Market Dashboard</title>
 
+
 <style>
 
 /* =====================================================
    BASE
 ===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
 
 html,
 body {
@@ -31,6 +37,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 
     overflow: hidden;
+
 }
 
 
@@ -64,7 +71,7 @@ h1 {
 
 
 /* =====================================================
-   TITOLI SEZIONE
+   TITOLI SEZIONI
 ===================================================== */
 
 .section-title {
@@ -86,33 +93,24 @@ h1 {
 
 
 /* =====================================================
-   CRYPTO
+   BTC ETH SOL
 ===================================================== */
 
 .crypto-top {
 
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+
     width: 100%;
-
-    height: 145px;
-
-    white-space: nowrap;
-
-    font-size: 0;
 
 }
 
 
 .crypto-card {
-
-    display: inline-block;
-
-    vertical-align: top;
-
-    width: 31.7%;
-
-    height: 145px;
-
-    margin-right: 2.4%;
 
     background:
         linear-gradient(
@@ -126,14 +124,18 @@ h1 {
 
     border-radius: 17px;
 
+    min-height: 145px;
+
     padding:
         15px 20px;
 
-    text-align: center;
+    display: flex;
 
-    white-space: normal;
+    flex-direction: column;
 
-    font-size: 16px;
+    justify-content: center;
+
+    align-items: center;
 
     box-shadow:
         0 4px 18px
@@ -142,31 +144,26 @@ h1 {
 }
 
 
-.crypto-card:last-child {
-
-    margin-right: 0;
-
-}
-
-
 .token-header {
 
-    text-align: center;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 11px;
 
 }
 
 
 .logo {
 
-    display: inline-block;
-
-    vertical-align: middle;
-
     width: 42px;
 
     height: 42px;
 
-    margin-right: 10px;
+    object-fit: contain;
 
     border-radius: 50%;
 
@@ -174,10 +171,6 @@ h1 {
 
 
 .symbol {
-
-    display: inline-block;
-
-    vertical-align: middle;
 
     font-size: 27px;
 
@@ -190,11 +183,13 @@ h1 {
 
     margin-top: 7px;
 
-    font-size: 34px;
+    font-size: 37px;
 
     font-weight: bold;
 
     white-space: nowrap;
+
+    text-align: center;
 
 }
 
@@ -230,30 +225,26 @@ h1 {
 
 .hnt-row {
 
+    display: grid;
+
+    grid-template-columns:
+        0.62fr
+        1.38fr;
+
+    gap: 16px;
+
     width: 100%;
 
-    height: 235px;
-
     margin-top: 16px;
-
-    white-space: nowrap;
-
-    font-size: 0;
 
 }
 
 
+/* =====================================================
+   HNT CARD
+===================================================== */
+
 .hnt-card {
-
-    display: inline-block;
-
-    vertical-align: top;
-
-    width: 29.5%;
-
-    height: 235px;
-
-    margin-right: 2.2%;
 
     background:
         linear-gradient(
@@ -267,13 +258,17 @@ h1 {
 
     border-radius: 17px;
 
+    min-height: 235px;
+
     padding: 18px;
 
-    text-align: center;
+    display: flex;
 
-    white-space: normal;
+    flex-direction: column;
 
-    font-size: 16px;
+    justify-content: center;
+
+    align-items: center;
 
     box-shadow:
         0 4px 18px
@@ -284,22 +279,22 @@ h1 {
 
 .hnt-header {
 
-    margin-top: 35px;
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
 
 }
 
 
 .hnt-logo {
 
-    display: inline-block;
-
-    vertical-align: middle;
-
     width: 43px;
 
     height: 43px;
 
-    margin-right: 10px;
+    object-fit: contain;
 
     border-radius: 50%;
 
@@ -307,10 +302,6 @@ h1 {
 
 
 .hnt-symbol {
-
-    display: inline-block;
-
-    vertical-align: middle;
 
     font-size: 28px;
 
@@ -321,7 +312,7 @@ h1 {
 
 .hnt-price {
 
-    font-size: 42px;
+    font-size: 44px;
 
     font-weight: bold;
 
@@ -362,14 +353,6 @@ h1 {
 
 .chart-card {
 
-    display: inline-block;
-
-    vertical-align: top;
-
-    width: 66%;
-
-    height: 235px;
-
     background:
         linear-gradient(
             145deg,
@@ -382,28 +365,28 @@ h1 {
 
     border-radius: 17px;
 
+    min-height: 235px;
+
     padding:
         12px
         15px
         10px
         15px;
 
-    white-space: normal;
-
-    font-size: 16px;
-
     box-shadow:
         0 4px 18px
         rgba(0,0,0,0.35);
-
-    overflow: hidden;
 
 }
 
 
 .chart-header {
 
-    height: 20px;
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
 
     color: #888888;
 
@@ -411,21 +394,26 @@ h1 {
 
     letter-spacing: 1px;
 
-}
-
-
-.chart-left {
-
-    float: left;
+    padding:
+        0 4px 5px 4px;
 
 }
 
 
-.chart-right {
-
-    float: right;
+#chartResult {
 
     font-weight: bold;
+
+}
+
+
+.chart-area {
+
+    width: 100%;
+
+    height: 190px;
+
+    position: relative;
 
 }
 
@@ -454,10 +442,6 @@ h1 {
 
 .stock-card {
 
-    width: 100%;
-
-    height: 225px;
-
     background:
         linear-gradient(
             145deg,
@@ -470,11 +454,15 @@ h1 {
 
     border-radius: 17px;
 
+    min-height: 225px;
+
     padding:
         15px
         22px
         14px
         22px;
+
+    width: 100%;
 
     box-shadow:
         0 4px 18px
@@ -485,33 +473,30 @@ h1 {
 }
 
 
+/* =====================================================
+   WE RIDE
+===================================================== */
+
 .stock-header {
 
-    height: 55px;
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    min-height: 55px;
 
 }
 
 
 .weride-logo {
 
-    display: inline-block;
-
-    vertical-align: middle;
-
     width: 48px;
 
     height: 48px;
 
-    margin-right: 14px;
-
-}
-
-
-.stock-info {
-
-    display: inline-block;
-
-    vertical-align: middle;
+    flex-shrink: 0;
 
 }
 
@@ -536,6 +521,10 @@ h1 {
 }
 
 
+/* =====================================================
+   TRADINGVIEW
+===================================================== */
+
 .tradingview-wrapper {
 
     width: 100%;
@@ -545,6 +534,24 @@ h1 {
     margin-top: 5px;
 
     overflow: hidden;
+
+}
+
+
+.tradingview-widget-container {
+
+    width: 100%;
+
+    height: 145px;
+
+}
+
+
+.tradingview-widget-container__widget {
+
+    width: 100%;
+
+    height: 145px;
 
 }
 
@@ -589,6 +596,69 @@ h1 {
 
 }
 
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    body {
+
+        padding-left: 4vw;
+
+        padding-right: 4vw;
+
+    }
+
+
+    h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .price {
+
+        font-size: 30px;
+
+    }
+
+
+    .hnt-price {
+
+        font-size: 35px;
+
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    body {
+
+        overflow-y: auto;
+
+    }
+
+
+    .crypto-top {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .hnt-row {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
 </style>
 
 </head>
@@ -597,10 +667,18 @@ h1 {
 <body>
 
 
+<!-- =====================================================
+     TITOLO
+===================================================== -->
+
 <h1>
     MARKET DASHBOARD
 </h1>
 
+
+<!-- =====================================================
+     CRYPTO
+===================================================== -->
 
 <div class="section-title">
     CRYPTO
@@ -621,9 +699,9 @@ h1 {
                 src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png"
                 alt="BTC">
 
-            <span class="symbol">
+            <div class="symbol">
                 BTC
-            </span>
+            </div>
 
         </div>
 
@@ -660,9 +738,9 @@ h1 {
                 src="https://assets.coingecko.com/coins/images/279/large/ethereum.png"
                 alt="ETH">
 
-            <span class="symbol">
+            <div class="symbol">
                 ETH
-            </span>
+            </div>
 
         </div>
 
@@ -699,9 +777,9 @@ h1 {
                 src="https://assets.coingecko.com/coins/images/4128/large/solana.png"
                 alt="SOL">
 
-            <span class="symbol">
+            <div class="symbol">
                 SOL
-            </span>
+            </div>
 
         </div>
 
@@ -731,11 +809,13 @@ h1 {
 
 
 <!-- =====================================================
-     HNT
+     HNT + GRAFICO
 ===================================================== -->
 
 <div class="hnt-row">
 
+
+    <!-- HNT -->
 
     <div class="hnt-card">
 
@@ -746,9 +826,9 @@ h1 {
                 src="https://assets.coingecko.com/coins/images/4284/large/Helium_HNT.png"
                 alt="HNT">
 
-            <span class="hnt-symbol">
+            <div class="hnt-symbol">
                 HNT
-            </span>
+            </div>
 
         </div>
 
@@ -787,27 +867,26 @@ h1 {
 
         <div class="chart-header">
 
-            <span class="chart-left">
+            <span>
                 HNT · LIVE TREND
             </span>
 
-            <span
-                class="chart-right"
-                id="chartResult">
-
+            <span id="chartResult">
                 ---
-
             </span>
 
         </div>
 
 
-        <canvas
-            id="hntChart">
-        </canvas>
+        <div class="chart-area">
+
+            <canvas
+                id="hntChart">
+            </canvas>
+
+        </div>
 
     </div>
-
 
 </div>
 
@@ -819,6 +898,7 @@ h1 {
 
 <div class="stock-section">
 
+
     <div class="section-title">
         STOCK
     </div>
@@ -829,6 +909,8 @@ h1 {
 
         <div class="stock-header">
 
+
+            <!-- WE RIDE LOGO -->
 
             <svg
                 class="weride-logo"
@@ -864,7 +946,7 @@ h1 {
             </svg>
 
 
-            <div class="stock-info">
+            <div>
 
                 <div class="stock-title">
                     WRD · WeRide
@@ -879,6 +961,9 @@ h1 {
 
         </div>
 
+
+
+        <!-- TRADINGVIEW -->
 
         <div class="tradingview-wrapper">
 
@@ -911,12 +996,15 @@ h1 {
 
         </div>
 
-
     </div>
 
 </div>
 
 
+
+<!-- =====================================================
+     STATO
+===================================================== -->
 
 <div id="updated">
 
@@ -941,17 +1029,18 @@ var PRICE_REFRESH = 40000;
 
 
 /*
-   Conserviamo gli ultimi prezzi HNT
-   ricevuti dalla stessa API che
-   già funziona sulla tua TV.
+   Memoria dei prezzi HNT.
+
+   Il grafico viene costruito usando
+   i prezzi ricevuti dalla stessa API
+   che alimenta le card.
 */
 
 var hntHistory = [];
 
 
 /*
-   Massimo numero di punti
-   conservati nel grafico.
+   Numero massimo di punti visualizzati.
 */
 
 var MAX_POINTS = 40;
@@ -997,16 +1086,36 @@ function formatPrice(
     }
 
 
-    return "$ " +
-        Number(price)
-        .toFixed(decimals);
+    return new Intl.NumberFormat(
+
+        "en-US",
+
+        {
+
+            style:
+                "currency",
+
+            currency:
+                "USD",
+
+            minimumFractionDigits:
+                decimals,
+
+            maximumFractionDigits:
+                decimals
+
+        }
+
+    ).format(
+        price
+    );
 
 }
 
 
 
 /* =====================================================
-   AGGIORNA SINGOLA COIN
+   RICHIESTA COINPAPRIKA
 ===================================================== */
 
 function requestCoin(
@@ -1065,7 +1174,9 @@ function requestCoin(
 
 
                 }
-                catch (e) {
+                catch (
+                    error
+                ) {
 
 
                     callback(
@@ -1073,7 +1184,6 @@ function requestCoin(
                     );
 
                 }
-
 
             }
             else {
@@ -1098,14 +1208,16 @@ function requestCoin(
         };
 
 
-    xhr.send(null);
+    xhr.send(
+        null
+    );
 
 }
 
 
 
 /* =====================================================
-   MOSTRA COIN
+   MOSTRA PREZZO
 ===================================================== */
 
 function displayCoin(
@@ -1167,7 +1279,7 @@ function displayCoin(
         priceElement
     ) {
 
-        priceElement.innerHTML =
+        priceElement.textContent =
             formatPrice(
                 price
             );
@@ -1181,7 +1293,7 @@ function displayCoin(
     ) {
 
 
-        changeElement.innerHTML =
+        changeElement.textContent =
 
             (
                 change >= 0
@@ -1196,33 +1308,37 @@ function displayCoin(
             "%";
 
 
-        changeElement.className =
+        if (
+            changeId ==
+            "helium-change"
+        ) {
 
-            changeId.indexOf(
-                "helium"
-            ) >= 0
 
-            ?
+            changeElement.className =
 
-            (
                 "hnt-change " +
+
                 (
                     change >= 0
                     ? "up"
                     : "down"
-                )
-            )
+                );
 
-            :
+        }
+        else {
 
-            (
+
+            changeElement.className =
+
                 "change " +
+
                 (
                     change >= 0
                     ? "up"
                     : "down"
-                )
-            );
+                );
+
+        }
 
     }
 
@@ -1234,16 +1350,13 @@ function displayCoin(
 
 
 /* =====================================================
-   PREZZI
+   AGGIORNA PREZZI
 ===================================================== */
 
 function updatePrices() {
 
 
-    var total = 0;
-
     var valid = 0;
-
 
     var finished = 0;
 
@@ -1256,14 +1369,20 @@ function updatePrices() {
 
         "btc-bitcoin",
 
-        function(data) {
+        function(
+            data
+        ) {
 
 
             if (
                 displayCoin(
+
                     "bitcoin",
+
                     "bitcoin-change",
+
                     data
+
                 )
             ) {
 
@@ -1274,7 +1393,7 @@ function updatePrices() {
 
             finished++;
 
-            checkFinished();
+            finish();
 
         }
 
@@ -1289,14 +1408,20 @@ function updatePrices() {
 
         "eth-ethereum",
 
-        function(data) {
+        function(
+            data
+        ) {
 
 
             if (
                 displayCoin(
+
                     "ethereum",
+
                     "ethereum-change",
+
                     data
+
                 )
             ) {
 
@@ -1307,7 +1432,7 @@ function updatePrices() {
 
             finished++;
 
-            checkFinished();
+            finish();
 
         }
 
@@ -1322,14 +1447,20 @@ function updatePrices() {
 
         "sol-solana",
 
-        function(data) {
+        function(
+            data
+        ) {
 
 
             if (
                 displayCoin(
+
                     "solana",
+
                     "solana-change",
+
                     data
+
                 )
             ) {
 
@@ -1340,7 +1471,7 @@ function updatePrices() {
 
             finished++;
 
-            checkFinished();
+            finish();
 
         }
 
@@ -1355,22 +1486,30 @@ function updatePrices() {
 
         "hnt-helium",
 
-        function(data) {
+        function(
+            data
+        ) {
 
 
             if (
                 displayCoin(
+
                     "helium",
+
                     "helium-change",
+
                     data
+
                 )
             ) {
+
 
                 valid++;
 
 
                 /*
-                   Salviamo il prezzo HNT.
+                   Salva il prezzo HNT
+                   per il grafico.
                 */
 
                 if (
@@ -1409,11 +1548,10 @@ function updatePrices() {
 
 
                         /*
-                           Manteniamo
-                           massimo 40 punti.
+                           Massimo 40 punti.
                         */
 
-                        if (
+                        while (
                             hntHistory.length >
                             MAX_POINTS
                         ) {
@@ -1423,7 +1561,7 @@ function updatePrices() {
                         }
 
 
-                        drawChart();
+                        drawHntChart();
 
                     }
 
@@ -1434,18 +1572,18 @@ function updatePrices() {
 
             finished++;
 
-            checkFinished();
+            finish();
 
         }
 
     );
 
 
-    function checkFinished() {
+    function finish() {
 
 
         if (
-            finished < 4
+            finished != 4
         ) {
 
             return;
@@ -1453,9 +1591,8 @@ function updatePrices() {
         }
 
 
-        document.getElementById(
-            "status"
-        ).className =
+        var statusClass =
+
             valid > 0
             ? "status"
             : "status old";
@@ -1466,13 +1603,7 @@ function updatePrices() {
         ).innerHTML =
 
             '<span class="' +
-
-            (
-                valid > 0
-                ? "status"
-                : "status old"
-            ) +
-
+            statusClass +
             '"></span>' +
 
             valid +
@@ -1492,10 +1623,10 @@ function updatePrices() {
 
 
 /* =====================================================
-   GRAFICO
+   GRAFICO HNT
 ===================================================== */
 
-function drawChart() {
+function drawHntChart() {
 
 
     var canvas =
@@ -1532,9 +1663,8 @@ function drawChart() {
 
 
     /*
-       Vecchi browser:
-       niente devicePixelRatio
-       per evitare problemi Canvas.
+       Compatibilità con
+       browser Tizen vecchi.
     */
 
     canvas.width =
@@ -1551,7 +1681,7 @@ function drawChart() {
 
 
     /*
-       Sfondo.
+       SFONDO
     */
 
     ctx.fillStyle =
@@ -1569,9 +1699,8 @@ function drawChart() {
 
 
     /*
-       Se abbiamo meno di
-       due prezzi, mostriamo
-       un messaggio.
+       Ancora pochi dati:
+       mostriamo un messaggio.
     */
 
     if (
@@ -1580,7 +1709,7 @@ function drawChart() {
 
 
         ctx.fillStyle =
-            "#555";
+            "#555555";
 
 
         ctx.font =
@@ -1592,6 +1721,7 @@ function drawChart() {
             "Raccolta dati HNT...",
 
             20,
+
             height / 2
 
         );
@@ -1599,7 +1729,7 @@ function drawChart() {
 
         document.getElementById(
             "chartResult"
-        ).innerHTML =
+        ).textContent =
             "LIVE";
 
 
@@ -1607,6 +1737,10 @@ function drawChart() {
 
     }
 
+
+    /*
+       MARGINI
+    */
 
     var left = 8;
 
@@ -1618,19 +1752,24 @@ function drawChart() {
 
 
     var chartWidth =
+
         width -
         left -
         right;
 
 
     var chartHeight =
+
         height -
         top -
         bottom;
 
 
-    var values = [];
+    /*
+       VALORI
+    */
 
+    var values = [];
 
     var i;
 
@@ -1666,12 +1805,6 @@ function drawChart() {
         max - min;
 
 
-    /*
-       Se i prezzi sono uguali
-       allarghiamo artificialmente
-       la scala.
-    */
-
     if (
         range <= 0
     ) {
@@ -1690,10 +1823,13 @@ function drawChart() {
         range * 0.15;
 
 
-    function getX(
+    /*
+       COORDINATE
+    */
+
+    function priceX(
         index
     ) {
-
 
         return left +
 
@@ -1709,10 +1845,9 @@ function drawChart() {
     }
 
 
-    function getY(
+    function priceY(
         price
     ) {
-
 
         return top +
 
@@ -1795,7 +1930,7 @@ function drawChart() {
 
 
         ctx.fillStyle =
-            "#777";
+            "#777777";
 
 
         ctx.fillText(
@@ -1805,7 +1940,7 @@ function drawChart() {
 
             width -
             right +
-            6,
+            7,
 
             y + 4
 
@@ -1815,7 +1950,7 @@ function drawChart() {
 
 
     /*
-       COLORE TREND
+       TREND
     */
 
     var firstPrice =
@@ -1828,7 +1963,7 @@ function drawChart() {
         ];
 
 
-    var color =
+    var trendColor =
 
         lastPrice >= firstPrice
 
@@ -1838,7 +1973,7 @@ function drawChart() {
 
 
     /*
-       AREA
+       AREA SOTTO LA LINEA
     */
 
     ctx.beginPath();
@@ -1852,11 +1987,11 @@ function drawChart() {
 
 
         var x =
-            getX(i);
+            priceX(i);
 
 
         var y2 =
-            getY(
+            priceY(
                 values[i]
             );
 
@@ -1911,9 +2046,9 @@ function drawChart() {
 
         lastPrice >= firstPrice
 
-        ? "rgba(0,208,132,0.12)"
+        ? "rgba(0,208,132,0.13)"
 
-        : "rgba(255,77,77,0.12)";
+        : "rgba(255,77,77,0.13)";
 
 
     ctx.fill();
@@ -1921,7 +2056,7 @@ function drawChart() {
 
 
     /*
-       LINEA
+       LINEA PRINCIPALE
     */
 
     ctx.beginPath();
@@ -1935,11 +2070,11 @@ function drawChart() {
 
 
         x =
-            getX(i);
+            priceX(i);
 
 
         y2 =
-            getY(
+            priceY(
                 values[i]
             );
 
@@ -1967,7 +2102,7 @@ function drawChart() {
 
 
     ctx.strokeStyle =
-        color;
+        trendColor;
 
 
     ctx.lineWidth = 3;
@@ -1990,13 +2125,13 @@ function drawChart() {
     */
 
     var lastX =
-        getX(
+        priceX(
             values.length - 1
         );
 
 
     var lastY =
-        getY(
+        priceY(
             lastPrice
         );
 
@@ -2016,7 +2151,7 @@ function drawChart() {
 
 
     ctx.fillStyle =
-        color;
+        trendColor;
 
 
     ctx.fill();
@@ -2024,11 +2159,11 @@ function drawChart() {
 
 
     /*
-       LINEA ORIZZONTALE
+       LINEA PREZZO ATTUALE
     */
 
     ctx.strokeStyle =
-        color;
+        trendColor;
 
 
     ctx.lineWidth = 1;
@@ -2070,18 +2205,18 @@ function drawChart() {
     */
 
     ctx.fillStyle =
-        color;
+        trendColor;
 
 
     ctx.fillRect(
 
         width -
         right +
-        2,
+        3,
 
         lastY - 10,
 
-        right - 4,
+        right - 5,
 
         20
 
@@ -2103,7 +2238,7 @@ function drawChart() {
 
         width -
         right +
-        6,
+        7,
 
         lastY + 4
 
@@ -2112,8 +2247,7 @@ function drawChart() {
 
 
     /*
-       VARIAZIONE DAL PRIMO
-       PUNTO RACCOLTO.
+       VARIAZIONE
     */
 
     var change =
@@ -2128,9 +2262,13 @@ function drawChart() {
         100;
 
 
-    document.getElementById(
-        "chartResult"
-    ).innerHTML =
+    var result =
+        document.getElementById(
+            "chartResult"
+        );
+
+
+    result.textContent =
 
         (
             change >= 0
@@ -2143,32 +2281,30 @@ function drawChart() {
         "%";
 
 
-    document.getElementById(
-        "chartResult"
-    ).style.color =
-        color;
+    result.style.color =
+        trendColor;
 
 
 
     /*
-       ETICHETTE TEMPORALI
+       ORARIO PRIMO PUNTO
     */
 
     ctx.fillStyle =
-        "#555";
+        "#555555";
 
 
     ctx.font =
         "10px Arial";
 
 
-    var firstTime =
+    var firstDate =
         new Date(
             hntHistory[0].time
         );
 
 
-    var lastTime =
+    var lastDate =
         new Date(
             hntHistory[
                 hntHistory.length - 1
@@ -2178,14 +2314,18 @@ function drawChart() {
 
     var firstText =
 
-        firstTime
+        firstDate
         .toLocaleTimeString(
 
             "it-IT",
 
             {
-                hour: "2-digit",
-                minute: "2-digit"
+                hour:
+                    "2-digit",
+
+                minute:
+                    "2-digit"
+
             }
 
         );
@@ -2193,14 +2333,18 @@ function drawChart() {
 
     var lastText =
 
-        lastTime
+        lastDate
         .toLocaleTimeString(
 
             "it-IT",
 
             {
-                hour: "2-digit",
-                minute: "2-digit"
+                hour:
+                    "2-digit",
+
+                minute:
+                    "2-digit"
+
             }
 
         );
@@ -2217,7 +2361,7 @@ function drawChart() {
     );
 
 
-    var textWidth =
+    var lastTextWidth =
         ctx.measureText(
             lastText
         ).width;
@@ -2229,7 +2373,7 @@ function drawChart() {
 
         left +
         chartWidth -
-        textWidth,
+        lastTextWidth,
 
         height - 5
 
@@ -2247,7 +2391,7 @@ updatePrices();
 
 
 /*
-   Aggiorna i prezzi
+   Aggiornamento prezzi:
    ogni 40 secondi.
 */
 
@@ -2256,6 +2400,24 @@ setInterval(
     updatePrices,
 
     PRICE_REFRESH
+
+);
+
+
+/*
+   Ridisegna se cambia
+   la dimensione della finestra.
+*/
+
+window.addEventListener(
+
+    "resize",
+
+    function() {
+
+        drawHntChart();
+
+    }
 
 );
 
