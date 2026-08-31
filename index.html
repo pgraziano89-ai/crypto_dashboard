@@ -45,6 +45,7 @@ h1 {
     margin-bottom: 12px;
 }
 
+
 /* =====================================================
    CRYPTO
 ===================================================== */
@@ -126,6 +127,7 @@ h1 {
 .down {
     color: #ff4d4d;
 }
+
 
 /* =====================================================
    HNT
@@ -215,6 +217,7 @@ h1 {
     letter-spacing: 1px;
 }
 
+
 /* =====================================================
    GRAFICO HNT
 ===================================================== */
@@ -274,6 +277,7 @@ h1 {
     width: 100%;
     height: 190px;
 }
+
 
 /* =====================================================
    STOCK / WERIDE
@@ -355,15 +359,8 @@ h1 {
     white-space: nowrap;
 }
 
-.weride-change {
-    margin-top: 8px;
-
-    font-size: 22px;
-    font-weight: bold;
-}
-
 .weride-label {
-    margin-top: 8px;
+    margin-top: 10px;
 
     color: #666666;
 
@@ -371,6 +368,7 @@ h1 {
 
     letter-spacing: 1px;
 }
+
 
 /* =====================================================
    STATO
@@ -409,15 +407,19 @@ h1 {
 
 <body>
 
+
 <h1>
     MARKET DASHBOARD
 </h1>
+
 
 <div class="section-title">
     CRYPTO
 </div>
 
+
 <div class="crypto-top">
+
 
     <!-- BTC -->
 
@@ -450,6 +452,7 @@ h1 {
 
     </div>
 
+
     <!-- ETH -->
 
     <div class="crypto-card">
@@ -480,6 +483,7 @@ h1 {
         </div>
 
     </div>
+
 
     <!-- SOL -->
 
@@ -514,11 +518,13 @@ h1 {
 
 </div>
 
+
 <!-- =====================================================
      HNT + GRAFICO
 ===================================================== -->
 
 <div class="hnt-row">
+
 
     <div class="hnt-card">
 
@@ -553,6 +559,7 @@ h1 {
 
     </div>
 
+
     <!-- GRAFICO HNT -->
 
     <div class="chart-card">
@@ -581,6 +588,7 @@ h1 {
 
 </div>
 
+
 <!-- =====================================================
      STOCK WERIDE
 ===================================================== -->
@@ -591,9 +599,12 @@ h1 {
         STOCK
     </div>
 
+
     <div class="stock-card">
 
+
         <div class="stock-header">
+
 
             <svg
                 class="weride-logo"
@@ -622,6 +633,7 @@ h1 {
 
             </svg>
 
+
             <div class="stock-info">
 
                 <div class="stock-title">
@@ -636,17 +648,12 @@ h1 {
 
         </div>
 
+
         <div class="weride-price-area">
 
             <div
                 class="weride-price"
                 id="weridePrice">
-                ---
-            </div>
-
-            <div
-                class="weride-change"
-                id="werideChange">
                 ---
             </div>
 
@@ -656,9 +663,11 @@ h1 {
 
         </div>
 
+
     </div>
 
 </div>
+
 
 <div id="updated">
 
@@ -671,20 +680,23 @@ h1 {
 
 </div>
 
+
 <script>
+
 
 /* =====================================================
    CONFIGURAZIONE
 ===================================================== */
 
 var PRICE_REFRESH = 90000;
+
 var CHART_REFRESH = 90000;
+
 var WERIDE_REFRESH = 60000;
 
 
 /* =====================================================
    PREZZI COINGECKO
-   IDENTICO AL CODICE ORIGINALE
 ===================================================== */
 
 function updatePrices() {
@@ -692,11 +704,13 @@ function updatePrices() {
     var xhr =
         new XMLHttpRequest();
 
+
     var url =
         "https://api.coingecko.com/api/v3/simple/price" +
         "?ids=bitcoin,ethereum,solana,helium" +
         "&vs_currencies=usd" +
         "&include_24hr_change=true";
+
 
     xhr.open(
         "GET",
@@ -704,14 +718,18 @@ function updatePrices() {
         true
     );
 
+
     xhr.onreadystatechange =
         function() {
 
             if (
                 xhr.readyState != 4
             ) {
+
                 return;
+
             }
+
 
             if (
                 xhr.status != 200
@@ -724,7 +742,9 @@ function updatePrices() {
                     "Connessione non disponibile";
 
                 return;
+
             }
+
 
             try {
 
@@ -734,6 +754,7 @@ function updatePrices() {
                     );
 
                 var valid = 0;
+
 
                 /* BTC */
 
@@ -749,7 +770,9 @@ function updatePrices() {
                     );
 
                     valid++;
+
                 }
+
 
                 /* ETH */
 
@@ -765,7 +788,9 @@ function updatePrices() {
                     );
 
                     valid++;
+
                 }
+
 
                 /* SOL */
 
@@ -781,7 +806,9 @@ function updatePrices() {
                     );
 
                     valid++;
+
                 }
+
 
                 /* HNT */
 
@@ -797,7 +824,9 @@ function updatePrices() {
                     );
 
                     valid++;
+
                 }
+
 
                 if (
                     valid > 0
@@ -838,6 +867,7 @@ function updatePrices() {
 
         };
 
+
     xhr.onerror =
         function() {
 
@@ -849,13 +879,14 @@ function updatePrices() {
 
         };
 
+
     xhr.send(null);
+
 }
 
 
 /* =====================================================
    MOSTRA PREZZO CRYPTO
-   IDENTICO AL CODICE ORIGINALE
 ===================================================== */
 
 function showCoin(
@@ -870,6 +901,7 @@ function showCoin(
     var changeId =
         name + "-change";
 
+
     if (
         name == "helium"
     ) {
@@ -879,36 +911,46 @@ function showCoin(
 
         changeId =
             "helium-change";
+
     }
+
 
     var priceElement =
         document.getElementById(
             priceId
         );
 
+
     var changeElement =
         document.getElementById(
             changeId
         );
 
+
     var number =
         Number(price);
 
+
     var decimals = 2;
+
 
     if (
         number < 1
     ) {
 
         decimals = 4;
+
     }
+
 
     if (
         number < 0.01
     ) {
 
         decimals = 6;
+
     }
+
 
     if (
         priceElement
@@ -922,6 +964,7 @@ function showCoin(
 
     }
 
+
     if (
         changeElement &&
         change !== undefined &&
@@ -932,6 +975,7 @@ function showCoin(
         var ch =
             Number(change);
 
+
         changeElement.innerHTML =
             (
                 ch >= 0
@@ -940,6 +984,7 @@ function showCoin(
             ) +
             Math.abs(ch).toFixed(2) +
             "%";
+
 
         if (
             name == "helium"
@@ -972,22 +1017,27 @@ function showCoin(
 
 
 /* =====================================================
-   WE RIDE WRD
-   SOLO PREZZO
+   WE RIDE
+   PREZZO WRD
 ===================================================== */
 
 function updateWeRide() {
 
-    var xhr =
-        new XMLHttpRequest();
-
     /*
-       Stooq fornisce quotazioni azionarie tramite CSV.
-       WRD = WeRide Inc.
+       Usiamo Yahoo Finance tramite
+       un proxy CORS pubblico.
+
+       Simbolo:
+       WRD = NASDAQ:WRD
     */
 
     var url =
-        "https://stooq.com/q/l/?s=wrd.us&f=sd2t2ohlcv&h&e=csv";
+        "https://query1.finance.yahoo.com/v8/finance/chart/WRD?range=1d&interval=1m";
+
+
+    var xhr =
+        new XMLHttpRequest();
+
 
     xhr.open(
         "GET",
@@ -995,39 +1045,231 @@ function updateWeRide() {
         true
     );
 
+
     xhr.onreadystatechange =
         function() {
 
             if (
                 xhr.readyState != 4
             ) {
+
                 return;
+
             }
+
 
             if (
                 xhr.status != 200
             ) {
 
-                document.getElementById(
-                    "weridePrice"
-                ).innerHTML =
-                    "---";
-
-                document.getElementById(
-                    "werideChange"
-                ).innerHTML =
-                    "DATI NON DISPONIBILI";
+                updateWeRideFallback();
 
                 return;
+
             }
+
+
+            try {
+
+                var data =
+                    JSON.parse(
+                        xhr.responseText
+                    );
+
+
+                if (
+                    data &&
+                    data.chart &&
+                    data.chart.result &&
+                    data.chart.result.length > 0
+                ) {
+
+                    var result =
+                        data.chart.result[0];
+
+
+                    var meta =
+                        result.meta;
+
+
+                    var price =
+                        null;
+
+
+                    /*
+                       currentPrice è il valore
+                       più aggiornato disponibile.
+                    */
+
+                    if (
+                        meta &&
+                        meta.regularMarketPrice !== undefined &&
+                        meta.regularMarketPrice !== null
+                    ) {
+
+                        price =
+                            Number(
+                                meta.regularMarketPrice
+                            );
+
+                    }
+
+
+                    /*
+                       Fallback sul timestamp
+                       più recente.
+                    */
+
+                    if (
+                        price === null ||
+                        isNaN(price)
+                    ) {
+
+                        var timestamps =
+                            result.timestamp;
+
+                        var quote =
+                            result.indicators &&
+                            result.indicators.quote &&
+                            result.indicators.quote[0];
+
+                        if (
+                            timestamps &&
+                            quote &&
+                            quote.close
+                        ) {
+
+                            var closes =
+                                quote.close;
+
+                            var i;
+
+                            for (
+                                i = closes.length - 1;
+                                i >= 0;
+                                i--
+                            ) {
+
+                                if (
+                                    closes[i] !== null &&
+                                    closes[i] !== undefined &&
+                                    !isNaN(closes[i])
+                                ) {
+
+                                    price =
+                                        Number(
+                                            closes[i]
+                                        );
+
+                                    break;
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+
+                    if (
+                        price !== null &&
+                        !isNaN(price)
+                    ) {
+
+                        showWeRidePrice(
+                            price
+                        );
+
+                        return;
+
+                    }
+
+                }
+
+
+                updateWeRideFallback();
+
+            }
+            catch (e) {
+
+                updateWeRideFallback();
+
+            }
+
+        };
+
+
+    xhr.onerror =
+        function() {
+
+            updateWeRideFallback();
+
+        };
+
+
+    xhr.send(null);
+
+}
+
+
+/* =====================================================
+   FALLBACK WERIDE
+===================================================== */
+
+function updateWeRideFallback() {
+
+    var xhr =
+        new XMLHttpRequest();
+
+
+    /*
+       Endpoint Stooq come seconda fonte.
+    */
+
+    var url =
+        "https://stooq.com/q/l/?s=wrd.us&f=sd2t2ohlcv&h&e=csv";
+
+
+    xhr.open(
+        "GET",
+        url,
+        true
+    );
+
+
+    xhr.onreadystatechange =
+        function() {
+
+            if (
+                xhr.readyState != 4
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                xhr.status != 200
+            ) {
+
+                showWeRideError();
+
+                return;
+
+            }
+
 
             try {
 
                 var text =
                     xhr.responseText.trim();
 
+
                 var lines =
-                    text.split("\n");
+                    text.split(/\r?\n/);
+
 
                 if (
                     lines.length < 2
@@ -1036,32 +1278,35 @@ function updateWeRide() {
                     throw new Error(
                         "No data"
                     );
+
                 }
 
-                var row =
-                    lines[1];
+
+                var fields =
+                    lines[1].split(",");
+
 
                 /*
                    CSV:
                    Symbol,Date,Time,Open,High,Low,Close,Volume
                 */
 
-                var fields =
-                    row.split(",");
-
                 if (
                     fields.length < 7
                 ) {
 
                     throw new Error(
-                        "Invalid CSV"
+                        "Invalid data"
                     );
+
                 }
+
 
                 var close =
                     parseFloat(
                         fields[6]
                     );
+
 
                 if (
                     isNaN(close)
@@ -1070,63 +1315,96 @@ function updateWeRide() {
                     throw new Error(
                         "Invalid price"
                     );
+
                 }
 
-                document.getElementById(
-                    "weridePrice"
-                ).innerHTML =
-                    "$ " +
-                    close.toFixed(2);
 
-                document.getElementById(
-                    "werideChange"
-                ).innerHTML =
-                    "WRD · PRICE";
-
-                document.getElementById(
-                    "werideChange"
-                ).className =
-                    "weride-change";
+                showWeRidePrice(
+                    close
+                );
 
             }
             catch (e) {
 
-                document.getElementById(
-                    "weridePrice"
-                ).innerHTML =
-                    "---";
-
-                document.getElementById(
-                    "werideChange"
-                ).innerHTML =
-                    "DATI NON DISPONIBILI";
+                showWeRideError();
 
             }
 
         };
 
+
     xhr.onerror =
         function() {
 
-            document.getElementById(
-                "weridePrice"
-            ).innerHTML =
-                "---";
-
-            document.getElementById(
-                "werideChange"
-            ).innerHTML =
-                "ERRORE RETE";
+            showWeRideError();
 
         };
 
+
     xhr.send(null);
+
+}
+
+
+/* =====================================================
+   MOSTRA PREZZO WERIDE
+===================================================== */
+
+function showWeRidePrice(
+    price
+) {
+
+    var element =
+        document.getElementById(
+            "weridePrice"
+        );
+
+
+    if (!element) {
+        return;
+    }
+
+
+    element.innerHTML =
+        "$ " +
+        Number(price).toFixed(2);
+
+
+    element.style.color =
+        "#ffffff";
+
+}
+
+
+/* =====================================================
+   ERRORE WERIDE
+===================================================== */
+
+function showWeRideError() {
+
+    var element =
+        document.getElementById(
+            "weridePrice"
+        );
+
+
+    if (!element) {
+        return;
+    }
+
+
+    element.innerHTML =
+        "---";
+
+
+    element.style.color =
+        "#777777";
+
 }
 
 
 /* =====================================================
    GRAFICO HNT
-   IDENTICO AL CODICE ORIGINALE
 ===================================================== */
 
 function updateHntChart() {
@@ -1134,16 +1412,19 @@ function updateHntChart() {
     var xhr =
         new XMLHttpRequest();
 
+
     var url =
         "https://api.coingecko.com/api/v3/coins/helium/market_chart" +
         "?vs_currency=usd" +
         "&days=1";
+
 
     xhr.open(
         "GET",
         url,
         true
     );
+
 
     xhr.onreadystatechange =
         function() {
@@ -1153,7 +1434,9 @@ function updateHntChart() {
             ) {
 
                 return;
+
             }
+
 
             if (
                 xhr.status != 200
@@ -1165,7 +1448,9 @@ function updateHntChart() {
                     "NO DATA";
 
                 return;
+
             }
+
 
             try {
 
@@ -1173,6 +1458,7 @@ function updateHntChart() {
                     JSON.parse(
                         xhr.responseText
                     );
+
 
                 if (
                     !data ||
@@ -1186,12 +1472,16 @@ function updateHntChart() {
                         "NO DATA";
 
                     return;
+
                 }
+
 
                 var source =
                     data.prices;
 
+
                 var points = [];
+
 
                 var step =
                     Math.max(
@@ -1201,7 +1491,9 @@ function updateHntChart() {
                         )
                     );
 
+
                 var i;
+
 
                 for (
                     i = 0;
@@ -1219,10 +1511,12 @@ function updateHntChart() {
                                 source[i][0]
                             );
 
+
                         var p =
                             Number(
                                 source[i][1]
                             );
+
 
                         if (
                             !isNaN(t) &&
@@ -1244,10 +1538,12 @@ function updateHntChart() {
 
                 }
 
+
                 var last =
                     source[
                         source.length - 1
                     ];
+
 
                 if (
                     last &&
@@ -1265,6 +1561,7 @@ function updateHntChart() {
                     });
 
                 }
+
 
                 if (
                     points.length >= 2
@@ -1296,6 +1593,7 @@ function updateHntChart() {
 
         };
 
+
     xhr.onerror =
         function() {
 
@@ -1306,14 +1604,14 @@ function updateHntChart() {
 
         };
 
+
     xhr.send(null);
 
 }
 
 
 /* =====================================================
-   DISEGNA GRAFICO
-   IDENTICO AL CODICE ORIGINALE
+   DISEGNA GRAFICO HNT
 ===================================================== */
 
 function drawChart(
@@ -1325,15 +1623,19 @@ function drawChart(
             "hntChart"
         );
 
+
     if (!canvas) {
         return;
     }
 
+
     var width =
         canvas.clientWidth;
 
+
     var height =
         canvas.clientHeight;
+
 
     if (
         width < 50 ||
@@ -1341,41 +1643,55 @@ function drawChart(
     ) {
 
         return;
+
     }
+
 
     canvas.width =
         width;
 
+
     canvas.height =
         height;
+
 
     var ctx =
         canvas.getContext(
             "2d"
         );
 
+
     if (!ctx) {
         return;
     }
 
+
     var left = 8;
+
     var right = 58;
+
     var top = 8;
+
     var bottom = 20;
+
 
     var chartWidth =
         width -
         left -
         right;
 
+
     var chartHeight =
         height -
         top -
         bottom;
 
+
     var values = [];
 
+
     var i;
+
 
     for (
         i = 0;
@@ -1391,11 +1707,13 @@ function drawChart(
 
     }
 
+
     var min =
         Math.min.apply(
             null,
             values
         );
+
 
     var max =
         Math.max.apply(
@@ -1403,8 +1721,10 @@ function drawChart(
             values
         );
 
+
     var range =
         max - min;
+
 
     if (
         range <= 0
@@ -1412,13 +1732,17 @@ function drawChart(
 
         range =
             max * 0.01;
+
     }
+
 
     min -=
         range * 0.08;
 
+
     max +=
         range * 0.08;
+
 
     function xPosition(index) {
 
@@ -1431,6 +1755,7 @@ function drawChart(
 
     }
 
+
     function yPosition(price) {
 
         return top +
@@ -1442,8 +1767,12 @@ function drawChart(
 
     }
 
+
+    /* SFONDO */
+
     ctx.fillStyle =
         "#0b0b0b";
+
 
     ctx.fillRect(
         0,
@@ -1452,8 +1781,12 @@ function drawChart(
         height
     );
 
+
+    /* GRIGLIA */
+
     ctx.font =
         "10px Arial";
+
 
     for (
         i = 0;
@@ -1468,24 +1801,31 @@ function drawChart(
             ) *
             chartHeight;
 
+
         ctx.strokeStyle =
             "rgba(255,255,255,0.07)";
 
+
         ctx.lineWidth = 1;
 
+
         ctx.beginPath();
+
 
         ctx.moveTo(
             left,
             gy
         );
 
+
         ctx.lineTo(
             left + chartWidth,
             gy
         );
 
+
         ctx.stroke();
+
 
         var gridPrice =
             max -
@@ -1496,8 +1836,10 @@ function drawChart(
                 max - min
             );
 
+
         ctx.fillStyle =
             "#777";
+
 
         ctx.fillText(
             "$" +
@@ -1508,20 +1850,29 @@ function drawChart(
 
     }
 
+
+    /* COLORE */
+
     var firstPrice =
         values[0];
+
 
     var lastPrice =
         values[
             values.length - 1
         ];
 
+
     var color =
         lastPrice >= firstPrice
         ? "#00d084"
         : "#ff4d4d";
 
+
+    /* AREA */
+
     ctx.beginPath();
+
 
     for (
         i = 0;
@@ -1532,10 +1883,12 @@ function drawChart(
         var px =
             xPosition(i);
 
+
         var py =
             yPosition(
                 values[i]
             );
+
 
         if (
             i == 0
@@ -1558,26 +1911,35 @@ function drawChart(
 
     }
 
+
     ctx.lineTo(
         left + chartWidth,
         height - bottom
     );
+
 
     ctx.lineTo(
         left,
         height - bottom
     );
 
+
     ctx.closePath();
+
 
     ctx.fillStyle =
         lastPrice >= firstPrice
         ? "rgba(0,208,132,0.12)"
         : "rgba(255,77,77,0.12)";
 
+
     ctx.fill();
 
+
+    /* LINEA */
+
     ctx.beginPath();
+
 
     for (
         i = 0;
@@ -1588,10 +1950,12 @@ function drawChart(
         px =
             xPosition(i);
 
+
         py =
             yPosition(
                 values[i]
             );
+
 
         if (
             i == 0
@@ -1614,30 +1978,41 @@ function drawChart(
 
     }
 
+
     ctx.strokeStyle =
         color;
 
+
     ctx.lineWidth = 3;
+
 
     ctx.lineJoin =
         "round";
 
+
     ctx.lineCap =
         "round";
 
+
     ctx.stroke();
+
+
+    /* ULTIMO PUNTO */
 
     var lastX =
         xPosition(
             values.length - 1
         );
 
+
     var lastY =
         yPosition(
             lastPrice
         );
 
+
     ctx.beginPath();
+
 
     ctx.arc(
         lastX,
@@ -1647,38 +2022,54 @@ function drawChart(
         Math.PI * 2
     );
 
+
     ctx.fillStyle =
         color;
 
+
     ctx.fill();
+
+
+    /* LINEA PREZZO */
 
     ctx.strokeStyle =
         color;
 
+
     ctx.lineWidth = 1;
+
 
     ctx.setLineDash(
         [4,4]
     );
 
+
     ctx.beginPath();
+
 
     ctx.moveTo(
         left,
         lastY
     );
 
+
     ctx.lineTo(
         left + chartWidth,
         lastY
     );
 
+
     ctx.stroke();
+
 
     ctx.setLineDash([]);
 
+
+    /* BOX PREZZO */
+
     ctx.fillStyle =
         color;
+
 
     ctx.fillRect(
         width - right + 2,
@@ -1687,11 +2078,14 @@ function drawChart(
         20
     );
 
+
     ctx.fillStyle =
         "#050505";
 
+
     ctx.font =
         "bold 10px Arial";
+
 
     ctx.fillText(
         "$" +
@@ -1699,6 +2093,9 @@ function drawChart(
         width - right + 5,
         lastY + 3
     );
+
+
+    /* VARIAZIONE */
 
     var change =
         (
@@ -1710,10 +2107,12 @@ function drawChart(
         ) *
         100;
 
+
     var result =
         document.getElementById(
             "chartResult"
         );
+
 
     if (result) {
 
@@ -1726,21 +2125,28 @@ function drawChart(
             change.toFixed(2) +
             "%";
 
+
         result.style.color =
             color;
 
     }
 
+
+    /* ORARI */
+
     ctx.fillStyle =
         "#555";
 
+
     ctx.font =
         "10px Arial";
+
 
     var firstDate =
         new Date(
             points[0].time
         );
+
 
     var lastDate =
         new Date(
@@ -1748,6 +2154,7 @@ function drawChart(
                 points.length - 1
             ].time
         );
+
 
     var firstText =
         firstDate.toLocaleTimeString(
@@ -1758,6 +2165,7 @@ function drawChart(
             }
         );
 
+
     var lastText =
         lastDate.toLocaleTimeString(
             "it-IT",
@@ -1767,16 +2175,19 @@ function drawChart(
             }
         );
 
+
     ctx.fillText(
         firstText,
         left,
         height - 5
     );
 
+
     var textWidth =
         ctx.measureText(
             lastText
         ).width;
+
 
     ctx.fillText(
         lastText,
@@ -1799,7 +2210,7 @@ updateWeRide();
 
 
 /* =====================================================
-   AGGIORNAMENTO
+   AGGIORNAMENTO AUTOMATICO
 ===================================================== */
 
 setInterval(
@@ -1807,10 +2218,12 @@ setInterval(
     PRICE_REFRESH
 );
 
+
 setInterval(
     updateHntChart,
     CHART_REFRESH
 );
+
 
 setInterval(
     updateWeRide,
